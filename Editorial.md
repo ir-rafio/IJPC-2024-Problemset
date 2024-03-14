@@ -45,7 +45,7 @@ Problem Setter: [Rafio](https://codeforces.com/profile/Rafio)
 
 Difficulty: Hard
 
-Tags: Math
+Tags: Math, Bitmasks, Binary Search
 
 <details>
 <summary>Hint</summary>
@@ -71,7 +71,7 @@ Recursive Solution
 </details>
 
 <details>
-<summary>Problem C - Abdullah's Array Problem</summary>
+<summary>Problem C - World Peace</summary>
 
 Problem Setter: [Abdullah Abrar](https://codeforces.com/profile/lelbaba)
 
@@ -152,7 +152,7 @@ $k=1^y+y^1=1+y$
 
 So $y=k-1$.
 
-Wait, you found a solution!
+Woah, you found a solution!
 
 </details>
 

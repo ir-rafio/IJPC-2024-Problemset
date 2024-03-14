@@ -3,6 +3,12 @@
 <details>
 <summary>Problem A - Colorful Socks</summary>
 
+Problem Setter: [Rafio](https://codeforces.com/profile/Rafio)
+
+Difficulty: Easy-Medium
+
+Tags: Greedy
+
 <details>
 <summary>Hint 1</summary>
 
@@ -35,6 +41,12 @@ Solution
 <details>
 <summary>Problem B - Darhi Palla</summary>
 
+Problem Setter: [Rafio](https://codeforces.com/profile/Rafio)
+
+Difficulty: Hard
+
+Tags: Math
+
 <details>
 <summary>Hint</summary>
 
@@ -61,6 +73,12 @@ Recursive Solution
 <details>
 <summary>Problem C - Abdullah's Array Problem</summary>
 
+Problem Setter: [Abdullah Abrar](https://codeforces.com/profile/lelbaba)
+
+Difficulty: Easy-Medium
+
+Tags: Number Theory
+
 <details>
 <summary>Hint</summary>
 
@@ -79,6 +97,12 @@ Solution
 <details>
 <summary>Problem D - Sabbir Sir's Problem</summary>
 
+Problem Setter: [Sabbir Ahmed](https://cse.iutoic-dhaka.edu/profile/sabbir)
+
+Difficulty: Impossible
+
+Tags: Machine Learning
+
 <details>
 <summary>Hint</summary>
 
@@ -96,6 +120,12 @@ Solution
 
 <details>
 <summary>Problem E - Moniter Goja, Gojar Monit</summary>
+
+Problem Setter: [Rafio](https://codeforces.com/profile/Rafio)
+
+Difficulty: Very Easy
+
+Tags: Math, Greedy
 
 <details>
 <summary>Hint 1</summary>
@@ -176,6 +206,12 @@ signed main()
 <details>
 <summary>Problem F - Reaz' Pattern Problem</summary>
 
+Problem Setter: [Reaz Hassan Joarder](https://codeforces.com/profile/ssshanto)
+
+Difficulty: Easy
+
+Tags: Implementation
+
 <details>
 <summary>Hint</summary>
 
@@ -193,6 +229,12 @@ Solution
 
 <details>
 <summary>Problem G - Monks' Game of Cards</summary>
+
+Problem Setter: [Rafio](https://codeforces.com/profile/Rafio)
+
+Difficulty: Medium
+
+Tags: Number Theory, Graphs
 
 <details>
 <summary>Hint</summary>
@@ -219,6 +261,12 @@ Graph Solution
 
 <details>
 <summary>Problem H - Forever Matrix</summary>
+
+Problem Setter: [Adib Farhan](https://codeforces.com/profile/Brownbear2710)
+
+Difficulty:
+
+Tags:
 
 <details>
 <summary>Hint</summary>

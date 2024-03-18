@@ -1,4 +1,4 @@
-# Editorial for Intra IUT Junior Programming Contest 2024
+# Editorial for Intra-IUT Junior Programming Contest 2024
 
 <details>
 <summary>Problem A - Colorful Socks</summary>
@@ -19,7 +19,7 @@ Handle the possible and impossible case separately.
 <details>
 <summary>Hint 2</summary>
 
-If there exists at least $2$ socks of the same color, it is always possible.
+If there remains at least $2$ socks of the same color, it is always possible.
 
 </details>
 
@@ -27,6 +27,13 @@ If there exists at least $2$ socks of the same color, it is always possible.
 <summary>Hint 3</summary>
 
 If Abid grabs $n+1$ socks, he will surely get at least 2 socks of the same color.
+
+</details>
+
+<details>
+<summary>Hint 4</summary>
+
+Does he always need to grab $n+1$ socks?
 
 </details>
 
@@ -45,7 +52,7 @@ Problem Setter: [Rafio](https://codeforces.com/profile/Rafio)
 
 Difficulty: Hard
 
-Tags: Math, Bitmasks, Binary Search
+Tags: Math, Binary Search
 
 <details>
 <summary>Hint</summary>
@@ -77,7 +84,7 @@ Problem Setter: [Abdullah Abrar](https://codeforces.com/profile/lelbaba)
 
 Difficulty: Easy-Medium
 
-Tags: Number Theory
+Tags: Number Theory, Data Structures
 
 <details>
 <summary>Hint</summary>
@@ -125,7 +132,7 @@ Problem Setter: [Rafio](https://codeforces.com/profile/Rafio)
 
 Difficulty: Very Easy
 
-Tags: Math, Greedy
+Tags: Math
 
 <details>
 <summary>Hint 1</summary>
@@ -146,11 +153,11 @@ If there exists multiple solutions, you may output any of them. So try to find t
 
 You have two unknown variables and only one equations. So you can choose a value for one of the variables and try to solve the equation for the other.
 
-Let's try $x=1$.
+Let's start with $x=1$.
 
 $k=1^y+y^1=1+y$
 
-So $y=k-1$.
+So, $y=k-1$.
 
 Woah, you found a solution!
 
@@ -234,7 +241,7 @@ Problem Setter: [Rafio](https://codeforces.com/profile/Rafio)
 
 Difficulty: Medium
 
-Tags: Number Theory, Graphs
+Tags: Number Theory, Graph Theory
 
 <details>
 <summary>Hint</summary>
@@ -264,9 +271,9 @@ Graph Solution
 
 Problem Setter: [Adib Farhan](https://codeforces.com/profile/Brownbear2710)
 
-Difficulty:
+Difficulty: Medium-Hard
 
-Tags:
+Tags: Implementation, Bitmasks
 
 <details>
 <summary>Hint</summary>
@@ -278,7 +285,15 @@ Hint
 <details>
 <summary>Solution</summary>
 
-Solution
+Recursive Solution
+
+</details>
+
+<details>
+
+<summary>Alternate Solution</summary>
+
+Bitmasks Solution
 
 </details>
 </details>

@@ -161,8 +161,6 @@ So, $y=k-1$.
 
 Woah, you found a solution!
 
-</details>
-
 <details>
 <summary>Code</summary>
 
@@ -207,6 +205,8 @@ signed main()
 }
 ```
 
+
+</details>
 </details>
 </details>
 

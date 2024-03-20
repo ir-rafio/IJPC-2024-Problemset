@@ -26,7 +26,7 @@ If there remains at least $2$ socks of the same color, it is always possible.
 <details>
 <summary>Hint 3</summary>
 
-If Abid grabs $n+1$ socks, he will surely get at least 2 socks of the same color.
+If Abid grabs $n+1$ socks, he will surely get at least $2$ socks of the same color.
 
 </details>
 
@@ -241,7 +241,7 @@ Problem Setter: [Rafio](https://codeforces.com/profile/Rafio)
 
 Difficulty: Medium
 
-Tags: Number Theory, Graph Theory
+Tags: Math, Graphs
 
 <details>
 <summary>Hint</summary>

@@ -5,7 +5,7 @@
 
 Problem Setter: [Rafio](https://codeforces.com/profile/Rafio)
 
-Difficulty: Easy-Medium
+Difficulty: Easy
 
 Tags: Greedy
 

@@ -211,11 +211,11 @@ signed main()
 </details>
 
 <details>
-<summary>Problem F - Reaz' Pattern Problem</summary>
+<summary>Problem F - Kingslayer</summary>
 
 Problem Setter: [Reaz Hassan Joarder](https://codeforces.com/profile/ssshanto)
 
-Difficulty: Easy
+Difficulty: Medium
 
 Tags: Implementation
 

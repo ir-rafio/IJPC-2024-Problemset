@@ -217,7 +217,7 @@ Problem Setter: [Reaz Hassan Joarder](https://codeforces.com/profile/ssshanto)
 
 Difficulty: Medium
 
-Tags: Implementation
+Tags: Brute Force, Implementation
 
 <details>
 <summary>Hint</summary>

@@ -598,7 +598,7 @@ signed main()
 </details>
 
 <details>
-<summary>Problem G - It's Time To Duel!</summary>
+<summary>Problem G - It's Time to Duel!</summary>
 
 Problem Setter: [Abdullah Abrar](https://codeforces.com/profile/lelbaba)
 

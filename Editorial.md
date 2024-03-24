@@ -114,9 +114,23 @@ Difficulty: Hard
 Tags: Math, Implementation
 
 <details>
-<summary>Hint</summary>
+<summary>Hint 1</summary>
 
-Hint
+You only need the first $21$ stones.
+
+</details>
+
+<details>
+<summary>Hint 2</summary>
+
+A correct combination always exists.
+
+</details>
+
+<details>
+<summary>Hint 3</summary>
+
+The correct combination is unique.
 
 </details>
 
@@ -295,7 +309,7 @@ Tags: Number Theory, Data Structures
 <details>
 <summary>Hint</summary>
 
-Hint
+Instead of thinking about the number of gift-boxes to remove, think about the number of gift-boxes to keep.
 
 </details>
 
@@ -317,13 +331,6 @@ Difficulty: Medium
 Tags: Brute Force, Implementation
 
 <details>
-<summary>Hint</summary>
-
-Hint
-
-</details>
-
-<details>
 <summary>Solution</summary>
 
 Solution
@@ -339,6 +346,20 @@ Problem Setter: [Rafio](https://codeforces.com/profile/Rafio)
 Difficulty: Medium
 
 Tags: Math, Graphs
+
+<details>
+<summary>Hint 1</summary>
+
+What is the effect of shuffling multiple times?
+
+</details>
+
+<details>
+<summary>Hint 2</summary>
+
+The effect of shuffling multiple times is the same as shuffling once with a different shuffle order.
+
+</details>
 
 <details>
 <summary>Solution</summary>
@@ -609,7 +630,7 @@ Tags: Greedy
 <details>
 <summary>Hint</summary>
 
-Hint
+Yugi's optimal play does not depend on what Kaiba will play and vice versa.
 
 </details>
 

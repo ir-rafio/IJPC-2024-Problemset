@@ -587,7 +587,9 @@ For the solution, you can decompose the given permutation into cycles and for ea
 For each round, find which cycle $p$ is in and move it $k$ steps ahead. If it goes beyong the cycle size, simply take the remainder modulo $m$.
 
 Time Complexity for preprocessing = $O(n)$.  
-Time Complexity for answering in each round = $O(1)$.
+Time Complexity per round = $O(1)$.  
+Time complexity for $r$ rounds = $O(r)$.  
+Overall Time Complexity for a test case = $O(n + r)$.
 
 <details>
 <summary>Code</summary>

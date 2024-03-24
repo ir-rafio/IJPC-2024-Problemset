@@ -344,7 +344,7 @@ pair<int,int> balance(int w)
  
     int stone=1, sum=1;
  
-    while(stone*3<=w)
+    while(stone*3<=w) // After escaping this loop: stone<=w, stone*3>w
     {
         stone*=3;
         sum+=stone;

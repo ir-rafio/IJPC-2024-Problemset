@@ -42,7 +42,7 @@ Does he always need to grab $(n+1)$ socks?
 
 Initially Abid had $a_i$ socks of color $i$ in his drawer. His brother took $b_i$ socks of color $i$. So there remains $a_i - b_i$ socks of color $i$ in Abid's drawer.
 
-The only case when Abid will not be able to find $2$ socks of the same color is when it doesn't exist. If there exists at least $2$ socks of the same color, in the worst case, Abid can grab all the socks of the drawer and later pick those $2$. This can be detected by checking if $a_i - b_i < 2$ for all $i \: (1 \le i \le n)$.
+The only case when Abid will not be able to find $2$ socks of the same color is when it doesn't exist. If there exists at least $2$ socks of the same color, in the worst case, Abid can grab all the socks of the drawer and later pick those $2$. This can be detected by checking if $a_i - b_i < 2$ for all $i$.
 
 Now, if there remains socks of $k$ different colors in Abis's drawer and he grabs $(k+1)$ socks, it is guaranteed that at least $2$ socks will have the same color (Pigeonhole Principle).  
 You can easily prove it using proof by contradiction. If no $2$ socks that Abid grabs have the same color, all the $(k+1)$ socks Abid grabs have different colors. But according to the premise, socks of $(k+1)$ different colors do not exist in Abid's drawer. So it's a contradiction.

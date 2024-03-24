@@ -53,7 +53,7 @@ So, the final solution is, after handling the impossible case separately, you ne
 
 Time complexity = $O(n)$.
 
-You can also handle the impossible case at the end. Count the total number of socks remaining in Abid's drawer, $\sum_{i} a_i - b_i$. If it is less than $n - z + 1$, then Abid can't grab that many socks. So it is impossible.
+You can also handle the impossible case at the end. Count the total number of socks remaining in Abid's drawer, $\sum_{i} (a_i - b_i)$. If it is less than $n - z + 1$, then Abid can't grab that many socks. So it is impossible.
 
 <details>
 <summary>Code</summary>

@@ -475,7 +475,29 @@ The effect of shuffling multiple times is the same as shuffling once with a diff
 <details>
 <summary>Solution</summary>
 
-Math Solution
+In the process of shuffling the deck multiple times, no new card enters the deck and no card leaves from the deck. The overall effect of shuffling multiple times is that some cards go from some positions to some different positions. So the effect of shuffling multiple times is the same as shuffling once with a different shuffle order (could even be the same order in some cases).
+
+For example, in the first sample test case, the initial deck is $a = \[10, 20, 30, 40, 50\]$. Shuffling it twice with the shuffle order, $s_1 = \[3, 5, 4, 1, 2\]$ has the same effect as shuffling once with the shuffle order $s_2 = \[4, 2, 1, 3, 5\]$. Here, $s_i$ means the shuffle order applying which on an array has the same effect as applying $s_1$ on the array $i$ times.
+
+One interesting observation is that the shuffle operation is associative.  
+If you apply the shuffle order on itself, you'll get a new shuffle order, applying which on an array has the effect of applying the original shuffle order twice.  
+Formally, if you have a shuffle order $s_1$, then you can create a new shuffle order $s_2 = s_1(s_1)$ such that $s_2(a) = s_1(s_1(a))$.
+
+In the same way, you can get $s_3 = s_2(s_1))$ and $s_4 = s_3(s_1)$. But instead of building linearly, you can build the shuffle orders exponentially.  
+$s_4 = s_2(s_2)$  
+$s_8 = s_4(s_4)$  
+$s_{16} = s_8(s_8)$  
+$s_{2i} = s_i(s_i)$
+
+Now, given a shuffle order $s_1$, you can calculate and store $s_2$, $s_4$, $s_8$, $...$, $s_{2^{60}}$.  
+Whenever, you find a $k$, you can find $s_k$ using its binary representation.  
+For example, $s_{22} = s_{16}(s_4(s_2))$.  
+With this approach, you can find $s_k(a)$ in $O(n \times \log(k))$ time.
+
+Finally, the cut operation is simply bringing the $p^{th}$ element ($0$-indexed) to the top.
+
+Overall Time Complexity per round = $O(n \times \log(k))$.  
+Time complexity for $r$ rounds = $O(n \times r \times \log(k))$.
 
 <details>
 <summary>Code</summary>
@@ -510,12 +532,12 @@ void solve(int tc)
     int i, n, r, k, p;
     cin >> n >> r;
  
-    vector<int> a(n), temp(n), sk(n);
-    vector<vector<int>> s(61, vector<int>(n));
+    vector<int> a(n), temp, sk(n);
+    vector<vector<int>> s(61, vector<int>(n)); // s[i] is s_{2 power i}
  
     for(auto &it: a) cin >> it;
     for(auto &it: s[0]) cin >> it;
-    for(auto &it: s[0]) it--;
+    for(auto &it: s[0]) it--; // Converting from 1-indexed to 0-indexed
  
     for(i=1; i<61; i++) s[i]=s[i-1], shuffle(s[i], s[i-1]);
  
@@ -523,8 +545,8 @@ void solve(int tc)
     {
         cin >> k >> p;
         
-        for(i=0; i<n; i++) sk[i]=i;
-        for(i=0; i<61; i++) if((k>>i)&1) shuffle(sk, s[i]);
+        for(i=0; i<n; i++) sk[i]=i; // Identity permutation (shuffle order): keeps every element where it is.
+        for(i=0; i<61; i++) if((k>>i)&1) shuffle(sk, s[i]); // ((k>>i)&1) checks whether the i-th bit of k is set.
         
         temp=a;
         shuffle(temp, sk);
@@ -557,7 +579,15 @@ signed main()
 
 <summary>Alternate Solution</summary>
 
-Graph Solution
+The shuffle order is a permutation.  
+Every permutation can be decomposed into one or more cycles.  
+Applying a permutaion once is equivalent to moving every element one step ahead in its cycle.
+
+For the solution, you can decompose the given permutation into cycles and for each element, store which cycle it belongs to and its position.  
+For each round, find which cycle $p$ is in and move it $k$ steps ahead. If it goes beyong the cycle size, simply take the remainder modulo $m$.
+
+Time Complexity for preprocessing = $O(n)$.  
+Time Complexity for answering in each round = $O(1)$.
 
 <details>
 <summary>Code</summary>
@@ -617,7 +647,6 @@ void solve(int tc)
         auto [id, offset]=pos[p];
         cs=cycles[id].size();
  
-        k%=cs;
         p=(offset+k)%cs;
  
         cout << a[cycles[id][p]] << endl;

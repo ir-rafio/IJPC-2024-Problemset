@@ -26,21 +26,34 @@ If there remains at least $2$ socks of the same color, it is always possible.
 <details>
 <summary>Hint 3</summary>
 
-If Abid grabs $n+1$ socks, he will surely get at least $2$ socks of the same color.
+If Abid grabs $(n+1)$ socks, he will surely get at least $2$ socks of the same color.
 
 </details>
 
 <details>
 <summary>Hint 4</summary>
 
-Does he always need to grab $n+1$ socks?
+Does he always need to grab $(n+1)$ socks?
 
 </details>
 
 <details>
 <summary>Solution</summary>
 
-Solution
+Initially Abid had $a_i$ socks of color $i$ in his drawer. His brother took $b_i$ socks of color $i$. So there remains $a_i - b_i$ socks of color $i$ in Abid's drawer.
+
+The only case when Abid will not be able to find $2$ socks of the same color is when it doesn't exist. If there exists at least $2$ socks of the same color, in the worst case, Abid can grab all the socks of the drawer and later pick those $2$. This can be detected by checking if $a_i - b_i < 2$ for all $i \: (1 \le i \le n)$.
+
+Now, if there remains socks of $k$ different colors in Abis's drawer and he grabs $(k+1)$ socks, it is guaranteed that at least $2$ socks will have the same color (Pigeonhole Principle).  
+You can easily prove it using proof by contradiction. If no $2$ socks that Abid grabs have the same color, all the $(k+1)$ socks Abid grabs have different colors. But according to the premise, socks of $(k+1)$ different colors do not exist in Abid's drawer. So it's a contradiction.
+
+Now, since Abid had socks of $n$ different colors, the maximum possible value of $k$ is $n$. However, there can be cases where $k$ is less than $n$. If for a color, Abid's brother took all the socks of that color, then socks of that color do not exist on the drawer anymore.
+
+So, the final solution is, after handling the impossible case separately, you need to count the number of $i$ where $a_i - b_i = 0$. Let's define it as $z$. Currently, Abid's drawer contains socks of $k = n - z$ different colors. So Abid needs to grab $n - z + 1$ socks to guarantee that at least $2$ socks will have the same color.
+
+Time complexity = $O(n)$.
+
+You can also handle the impossible case at the end. Count the total number of socks remaining in Abid's drawer, $\sum_{i} a_i - b_i$. If it is less than $n - z + 1$, then Abid can't grab that many socks. So it is impossible.
 
 <details>
 <summary>Code</summary>

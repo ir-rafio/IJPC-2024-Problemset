@@ -260,13 +260,13 @@ void solve(int tc)
     // Check out how the modified ternary number looks
     // for(i=ternary.size()-1; i>=0; i--) cout << ternary[i] << ' '; cout << endl;
 
-    int val=1;
+    int stone=1;
     for(i=0; i<ternary.size(); i++)
     {
-        if(ternary[i]==1) x+=val;
-        else if(ternary[i]==-1) y+=val;
+        if(ternary[i]==1) x+=stone;
+        else if(ternary[i]==-1) y+=stone;
 
-        val*=3;
+        stone*=3;
     }
  
     cout << x << ' ' << y;

@@ -296,20 +296,22 @@ signed main()
 
 <summary>Alternate Solution</summary>
 
+You have an object of weight $W$ on the right pan. To reach equilibrium, you need to add weight $W$ on the left pan.
+
 The weight of the $i^{th}$ stone is $3^i$ ($i$ starts from $0$).  
 If you use all stones from $0$ to $(i-1)$, the total weight will be $3^0 + 3^1 + 3^2 + ... + 3^{i-1} = \frac{3^i - 1}{2}$ (sum of geometric series). Let's define it as $s_{i-1}$.  
-So, if $3^i \le W < 3^{i+1}$, using all the stones from $0$ to $(i-1)$ will not be enough.  
-If you use all stones from $0$ to $i$, you can get to the total of $s_i = \frac{3^{i+1} - 1}{2}$.  
-Now, you can divide the problem into two cases and solve the problem recursively.  
+So, if $W \ge 3^i$, using all the stones from $0$ to $(i-1)$ will not be enough.  
+If you use all stones from $0$ to $i$, you can get to the total of $s_i = \frac{3^{i+1} - 1}{2}$. Clearly, $3^i < s_i < 3^{i+1}$ for any $i \in \mathbb{N}$.  
+Now, you can find the value of $i$ such that $W$ falls in the range $[3^i, 3^{i+1})$, divide the problem into two cases and solve the problem recursively.  
 
 Case $1$: $W \le s_i$  
-At first, place the $i^{th}$ stone on the left pan. Now the left pan has weight $3^i$ and the left pan has weight $W$. To reach equilibrium, we need to solve the problem for adding more stones of weight $(W - 3^i)$ on the left pan.
+At first, place the $i^{th}$ stone on the left pan. Now the left pan has weight $3^i$ and the left pan has weight $W$. To reach equilibrium, we need to add weight $(W - 3^i)$ on the left pan.
 
 Case $2$: $W > s_i$  
-At first, place the $(i+1)^{th}$ stone on the left pan. Now the left pan has weight $3^{i+1}$ and the left pan has weight $W$. To reach equilibrium, we need to solve the problem for adding stones of weight $(3^{i+1} - W)$ on the right pan.
+At first, place the $(i+1)^{th}$ stone on the left pan. Now the left pan has weight $3^{i+1}$ and the left pan has weight $W$. To reach equilibrium, we need to add weight $(3^{i+1} - W)$ on the right pan.
 
 Base Case: $W = 0$  
-No more stone needs to be placed.
+The balance has reached equilibrium and no more weight needs to be added.
 
 Time Complexity for a single recursion is $O(\log (W))$ for finding the value of $i$ such that $3^i \le W < 3^{i+1}$.  
 Maximum number of recursion calls for a single test case is $O(\log (W))$.  

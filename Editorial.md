@@ -342,7 +342,7 @@ pair<int,int> balance(int w)
 {
     if(w==0) return {0, 0};
  
-    int i=0, sum=1, stone=1;
+    int stone=1, sum=1;
  
     while(stone*3<=w)
     {

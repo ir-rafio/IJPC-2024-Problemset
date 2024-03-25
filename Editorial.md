@@ -454,7 +454,7 @@ Solution
 
 Problem Setter: [Rafio](https://codeforces.com/profile/Rafio)
 
-Difficulty: Medium
+Difficulty: Medium-Hard
 
 Tags: Math, Graphs
 

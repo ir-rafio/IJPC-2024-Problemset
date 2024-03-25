@@ -796,17 +796,16 @@ A player's optimal play does not depend on what his opponent will do.
 
 Both players will maximize their scores. Whoever has a higher score will win the duel. If they are equal, the duel will end in a tie.
 
-Let's define the value of a cards as the number written on it, a positive card as a card with a non-negative value and a negative cards as one with a negative value.  
+Let's define the value of a card as the number written on it, a positive card as a card with a non-negative value and a negative cards as one with a negative value.  
 The optimal play of a player is the best among these three options:
-- Use $1$ positive card with the highest number.
-- Use $2$ positive cards with the highest number.
-- Use $2$ negative cards with the highest absolute value (lowest value).
+- Use $1$ positive card with the highest value (if available).
+- Use $2$ positive cards with the highest value (if available).
+- Use $2$ negative cards with the lowest value (highest absolute value).
 
-Now, from a deck, you need the highest value $mx_1$, 2nd highest value $mx_2$, lowest value $mn_1$ and 2nd lowest value $mn_2$. You can loop over the array in $O(n)$ time to get these, but an easier implementation is to simply sort the array in $O(n \log(n))$ time. And get the values from the first $2$ and last $2$ indexes.
-
+Now, from a deck, you need the highest value $mx_1$, 2nd highest value $mx_2$, lowest value $mn_1$ and 2nd lowest value $mn_2$. You can loop over the array in $O(n)$ time to get these, but an easier implementation is to simply sort the array in $O(n \log(n))$ time. And get the values from the first $2$ and last $2$ indexes.  
 Maximum Score = $\max(mx_1, mx_1 \times mx_2, mn_1 \times mn_2)$.
 
-You can divide it into three cases: no positive value, one positive value and more than one positive values and handle them separately, but the result will be the same.
+You can divide it into three cases: no positive value, one positive value and more than one positive values, and handle them separately, but the result will be the same.
 
 <details>
 <summary>Code</summary>

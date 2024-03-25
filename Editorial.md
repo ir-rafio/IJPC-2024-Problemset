@@ -761,7 +761,21 @@ signed main()
 </details>
 
 <details>
-<summary>Problem G - It's Time to Duel!</summary>
+<summary>Problem G - MDP</summary>
+
+Problem Setter: [Bakhtiar Hasan](https://codeforces.com/profile/ishtupeed)
+
+Difficulty: Giveaway
+
+<details>
+<summary>Solution</summary>
+
+Just count the flag stands in IUT.
+
+</details>
+
+<details>
+<summary>Problem H - It's Time to Duel!</summary>
 
 Problem Setter: [Abdullah Abrar](https://codeforces.com/profile/lelbaba)
 
@@ -785,7 +799,7 @@ Solution
 </details>
 
 <details>
-<summary>Problem H - Forever Matrix</summary>
+<summary>Problem I - Forever Matrix</summary>
 
 Problem Setter: [Adib Farhan](https://codeforces.com/profile/Brownbear2710)
 

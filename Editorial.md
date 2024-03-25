@@ -773,6 +773,7 @@ Difficulty: Giveaway
 Just count the flag stands in IUT.
 
 </details>
+</details>
 
 <details>
 <summary>Problem H - It's Time to Duel!</summary>

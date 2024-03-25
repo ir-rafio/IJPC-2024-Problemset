@@ -829,7 +829,7 @@ Every permutation can be decomposed into one or more cycles.
 Applying a permutaion once is equivalent to moving every element one step ahead in its cycle.
 
 For the solution, you can decompose the given permutation into cycles and for each element, store which cycle it belongs to and its position.  
-For each round, find which cycle $p$ is in and move it $k$ steps ahead. If it goes beyong the cycle size, simply take the remainder modulo $m$.
+For each round, find which cycle $p$ is in and move it $k$ steps ahead. If it goes beyond the cycle size, simply take the remainder modulo the size of the cycle.
 
 Time Complexity for preprocessing = $O(n)$.  
 Time Complexity per round = $O(1)$.  

@@ -561,141 +561,116 @@ Time Complexity = $O(n)$.
 #include <bits/stdc++.h>
 using namespace std;
 
-// #define int long long
-#define fastio ios_base::sync_with_stdio(0); cin.tie(0)
-#define endl "\n"
+using LL = long long;
+using PII = pair <int, int>;
 
-pair<int,int> operator+(pair<int,int> p1, pair<int,int> p2) { return {p1.first+p2.first, p1.second+p2.second}; }
-pair<int,int> operator-(pair<int,int> p1, pair<int,int> p2) { return {p1.first-p2.first, p1.second-p2.second}; }
-pair<int,int> operator*(pair<int,int> p1, int k) { return {p1.first*k, p1.second*k}; }
+/*....................................................................*/ 
 
-string board[8];
-vector<pair<int,int>> kingMoves={{1, 1}, {1, 0}, {1, -1}, {0, 1}, {0, -1}, {-1, 1}, {-1, 0}, {-1, -1}};
-vector<pair<int,int>> knightMoves={{-1, -2}, {-1, 2}, {1, -2}, {1, 2}, {-2, -1}, {-2, 1}, {2, -1}, {2, 1}};
-vector<pair<int,int>> pawnMoves={{-1, 1}, {-1, -1}};
-
-bool isOutsideBoard(pair<int,int> cell)
-{
-    auto[x, y]=cell;
-    return x<0 || y<0 || x>7 || y>7;
+/*....................................................................*/ 
+const LL MOD = 1e9 + 7;
+PII operator + (PII &a, PII &b) {
+    return make_pair(a.first + b.first, a.second + b.second);
 }
 
-string notation(pair<int,int> cell)
-{
-    auto[x, y]=cell;
+vector <PII> rook = { {1, 0}, {-1, 0}, {0, 1}, {0, -1} };
+vector <PII> bish = { {1, -1}, {-1, 1}, {1, 1}, {-1, -1} };
+vector <PII> kngt = {{ 1,  2}, {-1,  2}, { 2, 1}, { 2, -1},
+                     { 1, -2}, {-1, -2}, {-2, 1}, {-2, -1}};
 
-    string ans="a8";
-    ans[0]+=y;
-    ans[1]-=x;
+vector <PII> pawn = { {-1, 1}, {-1, -1}};
+vector <PII> queen;
 
-    return ans;
+bool ok(int a) {
+    return a >= 0 and a < 8;
 }
-
-bool comp(pair<int,int> cell1, pair<int,int> cell2)
-{
-    return notation(cell1)<notation(cell2);
+bool ok(PII a) {
+    return ok(a.first) and ok(a.second);
 }
-
-pair<int,int> findAttacker(pair<int,int> target)
-{
-    pair<int,int> atk={-1, 8}, cell;
-
-    // Limited Mobility Piece: King
-    for(auto direction: kingMoves)
-    {
-        cell=target-direction;
-        if(isOutsideBoard(cell)) continue;
-
-        auto [x, y]=cell;
-        if(board[x][y]=='K') atk=min(atk, cell, comp);
-    }
-
-    // Limited Mobility Piece: Pawn
-    for(auto direction: pawnMoves)
-    {
-        cell=target-direction;
-        if(isOutsideBoard(cell)) continue;
-
-        auto [x, y]=cell;
-        if(board[x][y]=='P') atk=min(atk, cell, comp);
-    }
-
-    // Limited Mobility Piece: Knight
-    for(auto direction: knightMoves)
-    {
-        cell=target-direction;
-        if(isOutsideBoard(cell)) continue;
-
-        auto [x, y]=cell;
-        if(board[x][y]=='N') atk=min(atk, cell, comp);
-    }
-
-    // Unlimited Mobility Piece: Rook, Bishop, Queen
-    int i;
-    for(auto direction: kingMoves) for(i=1; i<8; i++)
-    {
-        cell=target-direction*i;
-        if(isOutsideBoard(cell)) break;
-
-        auto [x, y]=cell;
-
-        if(board[x][y]!='.')
-        {
-            if(board[x][y]=='R' && direction.first+direction.second==1) atk=min(atk, cell, comp);
-            if(board[x][y]=='R' && direction.first+direction.second==-1) atk=min(atk, cell, comp);
-
-            if(board[x][y]=='B' && direction.first+direction.second==2) atk=min(atk, cell, comp);
-            if(board[x][y]=='B' && direction.first+direction.second==-2) atk=min(atk, cell, comp);
-            if(board[x][y]=='B' && direction.first+direction.second==0) atk=min(atk, cell, comp);
-
-            if(board[x][y]=='Q') atk=min(atk, cell, comp);
-                
-            break; // If the piece is not capturing the target, then it is protecting it.
+pair <int, int> findBestSquare(vector <string> &board) {
+    int n = 8;
+    for(int j = 0; j < n; j++) {
+        for(int i = n - 1; i >= 0; i--) {
+            pair <int, int> cur = make_pair(i, j);
+            if(board[i][j] == 'R') {
+                for(auto e: rook) {
+                    auto go = cur + e;
+                    while(ok(go)) {
+                        auto [x, y] = go;
+                        if(board[x][y] == 'k') return make_pair(i, j);
+                        if(board[x][y] != '.') break;
+                        go = go + e;
+                    }
+                }
+            }
+            if(board[i][j] == 'B') {
+                for(auto e: bish) {
+                    auto go = cur + e;
+                    while(ok(go)) {
+                        auto [x, y] = go;
+                        if(board[x][y] == 'k') return make_pair(i, j);
+                        if(board[x][y] != '.') break;
+                        go = go + e;
+                    }
+                }
+            }
+            if(board[i][j] == 'Q') {
+                for(auto e: queen) {
+                    auto go = cur + e;
+                    while(ok(go)) {
+                        auto [x, y] = go;
+                        if(board[x][y] == 'k') return make_pair(i, j);
+                        if(board[x][y] != '.') break;
+                        go = go + e;
+                    }
+                }
+            }
+            if(board[i][j] == 'K') {
+                // king and queen moves are in same directions
+                for(auto e: queen) {
+                    auto go = cur + e;
+                    if(not ok(go)) continue;
+                    auto [x, y] = go;
+                    if(board[x][y] == 'k') return make_pair(i, j);
+                }
+            }
+            if(board[i][j] == 'N') {
+                for(auto e: kngt) {
+                    auto go = cur + e;
+                    if(not ok(go)) continue;
+                    auto [x, y] = go;
+                    if(board[x][y] == 'k') return make_pair(i, j);
+                }
+            }
+            if(board[i][j] == 'P') {
+                for(auto e: pawn) {
+                    auto go = cur + e;
+                    if(not ok(go)) continue;
+                    auto [x, y] = go;
+                    if(board[x][y] == 'k') return make_pair(i, j);
+                }
+            }
         }
     }
-
-    return atk;
+    return make_pair(-1, -1);
 }
 
-void pre()
-{
-    fastio;
-
-    
-}
-
-void solve(int tc)
-{
-    int i, j;
-    for(i=0; i<8; i++) cin >> board[i];
-    
-    pair<int,int> target={-1, 8}, atk;
-    for(i=0; i<8 && target.first<0; i++) for(j=0; j<8; j++) if(board[i][j]=='k')
-    {
-        target={i, j};
-        break;
+int main() {
+    cin.tie(0) -> sync_with_stdio(0);
+    int Tc;
+    cin >> Tc;
+    for(auto e: rook) queen.push_back(e);
+    for(auto e: bish) queen.push_back(e);
+    for(int tc = 1; tc <= Tc; tc++) {
+        vector <string> board(8);
+        int n = 8;
+        for(int i = 0; i < n; i++) cin >> board[i];
+        auto [x, y] = findBestSquare(board);
+        if(x == -1) cout << "NO\n";
+        else cout << "YES\n" << char('a' + y) << 8 - x << '\n';
     }
-
-    atk=findAttacker(target);
-    if(atk.first<0) cout << "NO";
-    else cout << "YES" << endl << notation(atk);
 }
 
-signed main()
-{
-    pre();
 
-    int tc, tt=1;
-    cin >> tt;
-    
-    for(tc=1; tc<=tt; tc++)
-    {
-        solve(tc);
-        if(tc<tt) cout << endl;
-    }
-
-    return 0;
-}
 ```
 
 </details>

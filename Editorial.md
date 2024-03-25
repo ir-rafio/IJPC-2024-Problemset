@@ -541,33 +541,12 @@ These will pass within the time limit easily because $n = 8$.
 <summary>Code</summary>
 
 ```cpp
-// Abdullah's Clean Code
-```
-
-</details>
-</details>
-
-<details>
-<summary>Alternate Solution</summary>
-
-Instead of traversing the entire board and using every white piece as a source, use the black king as a destination and try to find attackers by simulating moves in the reverse direction.
-
-Time Complexity = $O(n)$.
-
-<details>
-<summary>Code</summary>
-
-```cpp
 #include <bits/stdc++.h>
 using namespace std;
 
 using LL = long long;
 using PII = pair <int, int>;
 
-/*....................................................................*/ 
-
-/*....................................................................*/ 
-const LL MOD = 1e9 + 7;
 PII operator + (PII &a, PII &b) {
     return make_pair(a.first + b.first, a.second + b.second);
 }
@@ -669,8 +648,160 @@ int main() {
         else cout << "YES\n" << char('a' + y) << 8 - x << '\n';
     }
 }
+```
 
+</details>
+</details>
 
+<details>
+<summary>Alternate Solution</summary>
+
+Instead of traversing the entire board and using every white piece as a source, use the black king as a destination and try to find attackers by simulating moves in the reverse direction.
+
+Time Complexity = $O(n)$.
+
+<details>
+<summary>Code</summary>
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+// #define int long long
+#define fastio ios_base::sync_with_stdio(0); cin.tie(0)
+#define endl "\n"
+
+pair<int,int> operator+(pair<int,int> p1, pair<int,int> p2) { return {p1.first+p2.first, p1.second+p2.second}; }
+pair<int,int> operator-(pair<int,int> p1, pair<int,int> p2) { return {p1.first-p2.first, p1.second-p2.second}; }
+pair<int,int> operator*(pair<int,int> p1, int k) { return {p1.first*k, p1.second*k}; }
+
+string board[8];
+vector<pair<int,int>> kingMoves={{1, 1}, {1, 0}, {1, -1}, {0, 1}, {0, -1}, {-1, 1}, {-1, 0}, {-1, -1}};
+vector<pair<int,int>> knightMoves={{-1, -2}, {-1, 2}, {1, -2}, {1, 2}, {-2, -1}, {-2, 1}, {2, -1}, {2, 1}};
+vector<pair<int,int>> pawnMoves={{-1, 1}, {-1, -1}};
+
+bool isOutsideBoard(pair<int,int> cell)
+{
+    auto[x, y]=cell;
+    return x<0 || y<0 || x>7 || y>7;
+}
+
+string notation(pair<int,int> cell)
+{
+    auto[x, y]=cell;
+
+    string ans="a8";
+    ans[0]+=y;
+    ans[1]-=x;
+
+    return ans;
+}
+
+bool comp(pair<int,int> cell1, pair<int,int> cell2)
+{
+    return notation(cell1)<notation(cell2);
+}
+
+pair<int,int> findAttacker(pair<int,int> target)
+{
+    pair<int,int> atk={-1, 8}, cell;
+
+    // Limited Mobility Piece: King
+    for(auto direction: kingMoves)
+    {
+        cell=target-direction;
+        if(isOutsideBoard(cell)) continue;
+
+        auto [x, y]=cell;
+        if(board[x][y]=='K') atk=min(atk, cell, comp);
+    }
+
+    // Limited Mobility Piece: Pawn
+    for(auto direction: pawnMoves)
+    {
+        cell=target-direction;
+        if(isOutsideBoard(cell)) continue;
+
+        auto [x, y]=cell;
+        if(board[x][y]=='P') atk=min(atk, cell, comp);
+    }
+
+    // Limited Mobility Piece: Knight
+    for(auto direction: knightMoves)
+    {
+        cell=target-direction;
+        if(isOutsideBoard(cell)) continue;
+
+        auto [x, y]=cell;
+        if(board[x][y]=='N') atk=min(atk, cell, comp);
+    }
+
+    // Unlimited Mobility Piece: Rook, Bishop, Queen
+    int i;
+    for(auto direction: kingMoves) for(i=1; i<8; i++)
+    {
+        cell=target-direction*i;
+        if(isOutsideBoard(cell)) break;
+
+        auto [x, y]=cell;
+
+        if(board[x][y]!='.')
+        {
+            if(board[x][y]=='R' && direction.first+direction.second==1) atk=min(atk, cell, comp);
+            if(board[x][y]=='R' && direction.first+direction.second==-1) atk=min(atk, cell, comp);
+
+            if(board[x][y]=='B' && direction.first+direction.second==2) atk=min(atk, cell, comp);
+            if(board[x][y]=='B' && direction.first+direction.second==-2) atk=min(atk, cell, comp);
+            if(board[x][y]=='B' && direction.first+direction.second==0) atk=min(atk, cell, comp);
+
+            if(board[x][y]=='Q') atk=min(atk, cell, comp);
+                
+            break; // If the piece is not capturing the target, then it is protecting it.
+        }
+    }
+
+    return atk;
+}
+
+void pre()
+{
+    fastio;
+
+    
+}
+
+void solve(int tc)
+{
+    int i, j;
+    for(i=0; i<8; i++) cin >> board[i];
+    
+    pair<int,int> target={-1, 8}, atk;
+    for(i=0; i<8 && target.first<0; i++) for(j=0; j<8; j++) if(board[i][j]=='k')
+    {
+        target={i, j};
+        break;
+    }
+
+    atk=findAttacker(target);
+    if(atk.first<0) cout << "NO";
+    else cout << "YES" << endl << notation(atk);
+}
+
+signed main()
+{
+    pre();
+
+    int tc, tt=1;
+    cin >> tt;
+    
+    for(tc=1; tc<=tt; tc++)
+    {
+        solve(tc);
+        if(tc<tt) cout << endl;
+    }
+
+    return 0;
+}
 ```
 
 </details>

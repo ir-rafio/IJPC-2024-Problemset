@@ -797,10 +797,10 @@ A player's optimal play does not depend on what his opponent will do.
 Both players will maximize their scores. Whoever has a higher score will win the duel. If they are equal, the duel will end in a tie.
 
 Let's define the value of a cards as the number written on it, a positive card as a card with a non-negative value and a negative cards as one with a negative value.  
-The maximum score of a player is one of these 3 options:
-- $1$ positive card with the highest number.
-- $2$ positive cards with the highest number.
-- $2$ negative cards with the highest absolute value (lowest value).
+The optimal play of a player is the best among these three options:
+- Use $1$ positive card with the highest number.
+- Use $2$ positive cards with the highest number.
+- Use $2$ negative cards with the highest absolute value (lowest value).
 
 Now, from a deck, you need the highest value $mx_1$, 2nd highest value $mx_2$, lowest value $mn_1$ and 2nd lowest value $mn_2$. You can loop over the array in $O(n)$ time to get these, but an easier implementation is to simply sort the array in $O(n \log(n))$ time. And get the values from the first $2$ and last $2$ indexes.
 

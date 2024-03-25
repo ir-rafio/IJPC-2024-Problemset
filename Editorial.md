@@ -427,8 +427,92 @@ Instead of thinking about the number of gift-boxes to remove, think about the nu
 <details>
 <summary>Solution</summary>
 
-Solution
+The list of gift-boxes are represented by an array $a$ where the $a_i$ represents the number of toys in the $i^{th}$ box.
 
+After removing some gift-boxes from the left and from the right, what you'll have remaining is a contiguous subarray of $a$, $\[a_l, a_{l+1}, ..., a_r\]$ such that $a_l + a_{l+1} + ... + a_r$ is divisible by $m$. If multiple subarrays are valid, you have to take the longest one. If no non-empty subarray is valid, the mission can't be completed.
+
+However, if you try to check all possible subarrays, you'll need $O(n^2)$ time which will not pass within the time limit.
+
+Here's an observation:  
+If $(a_l + a_{l+1} + ... + a_r) \mod m = 0$,  
+$(a_1 + a_2 + ... + a_{l-1}) \mod m = (a_1 + a_2 + ... + a_r) \mod m$ (assuming $l > 1$).  
+So, $p_{l-1} \mod m = p_r \mod m$, where $p_i = a_1 + a_2 + ... + a_i$.
+
+Now, what you need to do is calculate $p$, the prefix sum of $a$, and keep track of where each remainder appeared in $p$. For that, you can use a map. If a remainder only appeared once, ignore that. Otherwise for each remainder, pick the distance between the positions of the first appearance and the last appearance. The first appearance of the remainder $0$ has to be manually set to $0$.  
+Your final answer should be $n$ minus the maximum distance or $-1$ if no remainders are found at least twice.
+
+Number of iterations = $O(n)$.  
+Access time for map = $O(\log (n))$.  
+So, Overall Time Complexity= $O(n \times \log (n))$.
+
+
+<details>
+<summary>Code</summary>
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+#define int long long
+#define fastio ios_base::sync_with_stdio(0); cin.tie(0)
+#define endl "\n"
+
+
+
+void pre()
+{
+    fastio;
+
+    
+}
+
+void solve(int tc)
+{
+    int i, n, m;
+    cin >> n >> m;
+
+    vector<int> v(n);
+    for(auto &it: v) cin >> it;
+
+    vector<int> p(n+1);
+    for(i=0; i<n; i++) p[i+1]=p[i]+v[i];
+
+    map<int,int> firstAppearance;
+    int rem, keep=-1, dist;
+    for(i=0; i<n+1; i++)
+    {
+        rem=p[i]%m;
+
+        if(firstAppearance.count(rem)==0) firstAppearance[rem]=i;
+        else
+        {
+            dist=i-firstAppearance[rem];
+            keep=max(keep, dist);
+        }
+    }
+
+    if(keep==-1) cout << -1;
+    else cout << n-keep;
+}
+
+signed main()
+{
+    pre();
+
+    int tc, tt=1;
+    cin >> tt;
+    
+    for(tc=1; tc<=tt; tc++)
+    {
+        solve(tc);
+        cout << endl;
+    }
+
+    return 0;
+}
+```
+
+</details>
 </details>
 </details>
 
@@ -771,6 +855,13 @@ Difficulty: Giveaway
 <summary>Solution</summary>
 
 Just count the flag stands in IUT.
+
+</details>
+
+<details>
+<summary>Alternate Solution</summary>
+
+Ask a senior.
 
 </details>
 </details>

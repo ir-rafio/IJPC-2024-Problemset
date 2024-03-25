@@ -537,6 +537,14 @@ This is an implementation problem. You can solve it using a brute force algorith
 Time Complexity = $O(n^2)$.  
 These will pass within the time limit easily because $n = 8$.
 
+<details>
+<summary>Code</summary>
+
+```cpp
+// Abdullah's Clean Code
+```
+
+</details>
 </details>
 
 <details>

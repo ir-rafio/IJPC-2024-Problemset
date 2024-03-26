@@ -1443,10 +1443,10 @@ Since in every step you are halving the height and width of the matrix, you can 
 Iterate over the bits of $x$ and $y$ and multiply the result with the appropriate multiplier.
 | Bit in $x$ | Bit in $y$ | Multiplier |
 | --- | --- | --- |
-| 0 | 0 | 1 |
-| 0 | 1 | a |
-| 1 | 0 | b |
-| 1 | 1 | c |
+| $0$ | $0$ | $1$ |
+| $0$ | $1$ | $a$ |
+| $1$ | $0$ | $b$ |
+| $1$ | $1$ | $c$ |
 
 </details>
 </details>

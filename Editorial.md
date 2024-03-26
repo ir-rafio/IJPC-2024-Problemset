@@ -527,7 +527,7 @@ Tags: Brute Force, Implementation
 <details>
 <summary>Solution</summary>
 
-This is an implementation problem. You can solve it using a brute force algorithm:
+This problem can be solved using a brute force algorithm:
 - Traverse the entire board.
 - For each white piece, simulate all of its moves. Depending on what type of piece it is, the movement will be different.
 - If a white piece can capture the king in one move, mark it as a candidate attacker.
@@ -536,6 +536,8 @@ This is an implementation problem. You can solve it using a brute force algorith
 
 Time Complexity = $O(n^2)$.  
 These will pass within the time limit easily because $n = 8$.
+
+This is an implementation problem that requires more time to code than to think. So multiple different codes are provided. You are encouraged to check them all out and try to understand how they're working. A general idea is that writing the same code multiple times is a bad practice. If a code block is reusable, it is often a good idea to create a function.
 
 <details>
 <summary>Code</summary>
@@ -568,7 +570,7 @@ bool ok(PII a) {
 pair <int, int> findBestSquare(vector <string> &board) {
     int n = 8;
     for(int j = 0; j < n; j++) {
-        for(int i = n - 1; i >= 0; i--) {
+        for(int i = n - 1; i >= 0; i--) { // Traversing in lexicographic order, so don't have to check lexicographically smallest later.
             pair <int, int> cur = make_pair(i, j);
             if(board[i][j] == 'R') {
                 for(auto e: rook) {
@@ -630,7 +632,7 @@ pair <int, int> findBestSquare(vector <string> &board) {
             }
         }
     }
-    return make_pair(-1, -1);
+    return make_pair(-1, -1); // No attacker found
 }
 
 int main() {
@@ -646,6 +648,106 @@ int main() {
         auto [x, y] = findBestSquare(board);
         if(x == -1) cout << "NO\n";
         else cout << "YES\n" << char('a' + y) << 8 - x << '\n';
+    }
+}
+```
+
+</details>
+
+<details>
+<summary>Code</summary>
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+#ifdef LOCAL
+#include "dbg.h"
+#else
+#define dbg(...) {/* AAAAAAAA; */}
+#endif
+
+using LL = long long;
+using PII = pair<int,int>;
+
+string board[8];
+
+vector<PII> bishopGo = {{+1, +1}, {+1, -1}, {-1, +1}, {-1, -1}};
+vector<PII> rookGo = {{+1, 0}, {-1, 0}, {0, +1}, {0, -1}};
+
+int sx, sy, dx, dy;
+
+bool knightMove() {
+    return (abs(sx - dx) == 2 and abs(sy - dy) == 1)
+        or (abs(sx - dx) == 1 and abs(sy - dy) == 2);
+}
+
+bool valid(int x, int y) {
+    return (x >= 0 and y >= 0 and x < 8 and y < 8 and
+        (board[x][y] == '.' or board[x][y] == 'k'));
+}
+
+bool bishopMove() {
+    for(auto &[mx, my]: bishopGo) {
+        for(int i=sx+mx, j=sy+my; valid(i, j); i+=mx, j+=my) {
+            if(i == dx and j == dy) return true;
+        }
+    }
+    return false;
+}
+
+bool rookMove() {
+    for(auto &[mx, my]: rookGo) {
+        for(int i=sx+mx, j=sy+my; valid(i, j); i+=mx, j+=my) {
+            if(i == dx and j == dy) return true;
+        }
+    }
+    return false;
+}
+
+bool pawnMove() {
+    return (dx == sx - 1 and (dy == sy + 1 or dy == sy - 1));
+}
+
+bool queenMove() {
+    return (rookMove() or bishopMove());
+}
+
+bool kingMove() {
+    return (abs(dx - sx) <= 1 and abs(dy - sy) <= 1);
+}
+
+void solve() {
+    for(int i=0; i<8; i++) {
+        cin >> board[i];
+        for(int j=0; j<8; j++)
+            if(board[i][j] == 'k') dx = i, dy = j;
+    }
+
+    for(int j=0; j<8; j++) {
+        for(int i=7; i>=0; i--) { // Traversing in lexicographic order, the first valid attacker is the answer.
+            bool done = false;
+            sx = i, sy = j;
+            if(board[i][j] == 'K') done = kingMove();
+            if(board[i][j] == 'Q') done = queenMove();
+            if(board[i][j] == 'R') done = rookMove();
+            if(board[i][j] == 'B') done = bishopMove();
+            if(board[i][j] == 'N') done = knightMove();
+            if(board[i][j] == 'P') done = pawnMove();
+            if(done) {
+                cout << "YES\n";
+                cout << char('a' + j) << (8 - i) << "\n";
+                return;
+            }
+        }
+    }
+    cout << "NO\n"; // No attacker found
+}
+
+int main()
+{
+    int tc; cin >> tc;
+    while(tc--) {
+        solve();
     }
 }
 ```
@@ -1163,9 +1265,9 @@ A player's optimal play does not depend on what his opponent will do.
 Both players will maximize their scores. Whoever has a higher score will win the duel. If they are equal, the duel will end in a tie.
 
 Let's define the value of a card as the number written on it, a positive card as a card with a non-negative value and a negative cards as one with a negative value.  
-The optimal play of a player is the best among these three options:
-- Use $1$ positive card with the highest value (if available).
-- Use $2$ positive cards with the highest value (if available).
+The optimal play of a player is the best among these three options (one or two options may not be available):
+- Use $1$ positive card with the highest value.
+- Use $2$ positive cards with the highest value.
 - Use $2$ negative cards with the lowest value (highest absolute value).
 
 Now, from a deck, you need the highest value $mx_1$, 2nd highest value $mx_2$, lowest value $mn_1$ and 2nd lowest value $mn_2$. You can loop over the array in $O(n)$ time to get these, but an easier implementation is to simply sort the array in $O(n \log(n))$ time. And get the values from the first $2$ and last $2$ indexes.  

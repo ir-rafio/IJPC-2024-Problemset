@@ -1233,7 +1233,7 @@ If there exists multiple solutions, you may output any of them. So try to find t
 
 You have two unknown variables and only one equations. So you can choose a value for one of the variables and try to solve the equation for the other.
 
-It's often a good idea to think about the extreme case first. So start with $x=1$.
+Let's start with $x=1$.
 
 $k = 1^y + y^1 = 1+y$  
 So, $y=k-1$.  
@@ -1428,9 +1428,90 @@ You don't need to build the matrix, you only need one value.
 
 Let $z = \max(x, y)$. So, $M_{\log(z+1)}$ should contain the cell $(x, y)$.
 
-All you need to do is recursively find on which quadrant the cell is, multiply the value of the quadrant and get the position of the cell corresponding to the shrunk matrix.
+All you need to do is find on which quadrant the cell is, multiply the value of the quadrant and get the position of the cell corresponding to the shrunk matrix.  
+Do the same process for the shrunk matrix and keep shrinking the matrix untill you reach size $1$.  
+Don't forget about the mod operation.
 
 Time Complexity = $O(\log(z))$
+
+<details>
+<summary>Code</summary>
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+#define int long long
+#define fastio ios_base::sync_with_stdio(0); cin.tie(0)
+#define endl "\n"
+
+const int MOD=1e9+7;
+
+void pre()
+{
+    fastio;
+
+    
+}
+
+void solve(int tc)
+{
+    int a, b, c, x, y, z, sz, ans=1;
+    cin >> a >> b >> c >> x >> y;
+
+    z=max(x, y);
+    sz=1<<(__lg(z)+1); // Equivalent to 2^(log2(z)+1)
+
+    while(sz>1)
+    {
+        if(x<sz/2 && y<sz/2)
+        {
+            ans*=1; ans%=MOD;
+        }
+
+        else if(x<sz/2 && y>=sz/2)
+        {
+            ans*=a; ans%=MOD;
+            y-=sz/2;
+        }
+
+        else if(x>=sz/2 && y<sz/2)
+        {
+            ans*=b; ans%=MOD;
+            x-=sz/2;
+        }
+
+        else // x>=sz/2 && y>=sz/2
+        {
+            ans*=c; ans%=MOD;
+            x-=sz/2;
+            y-=sz/2;
+        }
+
+        sz/=2;
+    }
+
+    cout << ans;
+}
+
+signed main()
+{
+    pre();
+
+    int tc, tt=1;
+    cin >> tt;
+    
+    for(tc=1; tc<=tt; tc++)
+    {
+        solve(tc);
+        cout << endl;
+    }
+
+    return 0;
+}
+```
+
+</details>
 
 </details>
 
@@ -1438,7 +1519,7 @@ Time Complexity = $O(\log(z))$
 
 <summary>Alternate Solution</summary>
 
-Since in every step you are halving the height and width of the matrix, you can consider the binary represtation of $x$ and $y$ to solve the problem.
+Since in every step you are halving the height and width of the matrix, you can solve the problem using bits.
 
 Iterate over the bits of $x$ and $y$ and multiply the result with the appropriate multiplier.
 | Bit in $x$ | Bit in $y$ | Multiplier |
@@ -1447,6 +1528,63 @@ Iterate over the bits of $x$ and $y$ and multiply the result with the appropriat
 | $0$ | $1$ | $a$ |
 | $1$ | $0$ | $b$ |
 | $1$ | $1$ | $c$ |
+
+<details>
+<summary>Code</summary>
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+#define int long long
+#define fastio ios_base::sync_with_stdio(0); cin.tie(0)
+#define endl "\n"
+
+const int MOD=1e9+7;
+
+void pre()
+{
+    fastio;
+
+    
+}
+
+void solve(int tc)
+{
+    int a, b, c, x, y, ans=1;
+    cin >> a >> b >> c >> x >> y;
+
+    while(x>0 || y>0)
+    {
+        if(x%2==0 && y%2==0) ans*=1, ans%=MOD;
+        if(x%2==0 && y%2==1) ans*=a, ans%=MOD;
+        if(x%2==1 && y%2==0) ans*=b, ans%=MOD;
+        if(x%2==1 && y%2==1) ans*=c, ans%=MOD;
+
+        x>>=1, y>>=1;
+    }
+
+    cout << ans;
+}
+
+signed main()
+{
+    pre();
+
+    int tc, tt=1;
+    cin >> tt;
+    
+    for(tc=1; tc<=tt; tc++)
+    {
+        solve(tc);
+        cout << endl;
+    }
+
+    return 0;
+}
+```
+
+</details>
 
 </details>
 </details>

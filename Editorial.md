@@ -12,7 +12,7 @@ Tags: Greedy
 <details>
 <summary>Hint 1</summary>
 
-Handle the possible and impossible case separately.
+Handle the possible and impossible cases separately.
 
 </details>
 
@@ -40,7 +40,7 @@ Does he always need to grab $(n+1)$ socks?
 <details>
 <summary>Solution</summary>
 
-Initially Abid had $a_i$ socks of color $i$ in his drawer. His brother took $b_i$ socks of color $i$. So there remains $a_i - b_i$ socks of color $i$ in Abid's drawer.
+Initially Abid had $a_i$ socks of color $i$ in his drawer. His brother took $b_i$ socks of color $i$. So there remains $(a_i - b_i)$ socks of color $i$ in Abid's drawer.
 
 The only case when Abid will not be able to find $2$ socks of the same color is when it doesn't exist. If there exists at least $2$ socks of the same color, in the worst case, Abid can grab all the socks of the drawer and later pick those $2$. This can be detected by checking if $a_i - b_i < 2$ for all $i$.
 
@@ -49,11 +49,11 @@ You can easily prove it using proof by contradiction. If no $2$ socks that Abid 
 
 Now, since Abid had socks of $n$ different colors, the maximum possible value of $k$ is $n$. However, there can be cases where $k$ is less than $n$. If for a color, Abid's brother took all the socks of that color, then socks of that color do not exist on the drawer anymore.
 
-So, the final solution is, after handling the impossible case separately, you need to count the number of $i$ where $a_i - b_i = 0$. Let's define it as $z$. Currently, Abid's drawer contains socks of $k = n - z$ different colors. So Abid needs to grab $n - z + 1$ socks to guarantee that at least $2$ socks will have the same color.
+So, the final solution is, after handling the impossible case separately, you need to count the number of $i$ where $a_i - b_i = 0$. Let's define it as $z$. Currently, Abid's drawer contains socks of $(k = n - z)$ different colors. So Abid needs to grab $(n - z + 1)$ socks to guarantee that at least $2$ socks will have the same color.
 
 Time complexity = $O(n)$.
 
-You can also handle the impossible case at the end. Count the total number of socks remaining in Abid's drawer, $\sum_{i} (a_i - b_i)$. If it is less than $n - z + 1$, then Abid can't grab that many socks. So it is impossible.
+You can also handle the impossible case at the end. Count the total number of socks remaining in Abid's drawer, $\sum_{i} (a_i - b_i)$. If it is less than $(n - z + 1)$, then Abid can't grab that many socks. So it is impossible.
 
 <details>
 <summary>Code</summary>
@@ -192,10 +192,10 @@ Time Complexity for calculating $X$ and $Y$ = $O(\log (W))$.
 Overall Time Complexity for a test case = $O(\log (W))$.
 
 <details>
-<summary>Example Simulation</summary>
+<summary>Example Simulations</summary>
 
 <details>
-<summary>$W = 10$</summary>
+<summary>Example 1: $W = 10$</summary>
 
 $W = 10 = 9 + 1 = (101)_3$
 
@@ -209,7 +209,7 @@ Final answer: $X = 3^0 + 3^2 = 1 + 9 = 10$, $Y = 0$.
 </details>
 
 <details>
-<summary>$W = 775$</summary>
+<summary>Example 2: $W = 775$</summary>
 
 $W = 775 = 729 + 27 + 18 + 1 = 729 + 27 + 2 \times 9 + 1 = (1001201)_3$
 
@@ -223,7 +223,7 @@ The $6^{th}$ digit is $1$.
 
 Modified ternary representation of $W$ = $101mm01$. Here, $m$ means the digit is $-1$.  
 Final answer: $X = 3^0 + 3^4 + 3^6 = 1 + 81 + 729 = 811$, $Y = 3^2 + 3^3 = 9 + 27 = 36$.  
-Verification: $811 - 36 = 775$.  
+Verification: $811 - 36 = 775$.
 
 </details>
 </details>
@@ -443,7 +443,7 @@ Your final answer should be $n$ minus the maximum distance or $-1$ if no remaind
 
 Number of iterations = $O(n)$.  
 Access time for map = $O(\log (n))$.  
-So, Overall Time Complexity= $O(n \times \log (n))$.
+So, Overall Time Complexity = $O(n \times \log (n))$.
 
 <details>
 <summary>Code</summary>
@@ -922,12 +922,19 @@ Tags: Math, Graphs
 <details>
 <summary>Hint 1</summary>
 
-What is the effect of shuffling multiple times?
+Take an array and a shuffle order. Shuffle the array multiple times and observe what's happening.
 
 </details>
 
 <details>
 <summary>Hint 2</summary>
+
+What is the effect of shuffling multiple times?
+
+</details>
+
+<details>
+<summary>Hint 3</summary>
 
 The effect of shuffling multiple times is the same as shuffling once with a different shuffle order.
 
@@ -936,26 +943,44 @@ The effect of shuffling multiple times is the same as shuffling once with a diff
 <details>
 <summary>Solution</summary>
 
-In the process of shuffling the deck multiple times, no new card enters the deck and no card leaves from the deck. The overall effect of shuffling multiple times is that some cards go from some positions to some different positions. So the effect of shuffling multiple times is the same as shuffling once with a different shuffle order (could even be the same order in some cases).
+A permutation of size $n$ is an array of size $n$ where each integer from $1$ to $n$ appears exactly once. Any shuffle order is a permutation.
 
-For example, in the first sample test case, the initial deck is $a = \[10, 20, 30, 40, 50\]$. Shuffling it twice with the shuffle order, $s_1 = \[3, 5, 4, 1, 2\]$ has the same effect as shuffling once with the shuffle order $s_2 = \[4, 2, 1, 3, 5\]$. Here, $s_i$ means the shuffle order applying which on an array has the same effect as applying $s_1$ on the array $i$ times.
+Let's define applying a shuffle order on an array as shuffling the array using that shuffle order.
 
-One interesting observation is that the shuffle operation is associative.  
-If you apply the shuffle order on itself, you'll get a new shuffle order, applying which on an array has the effect of applying the original shuffle order twice.  
-Formally, if you have a shuffle order $s_1$, then you can create a new shuffle order $s_2 = s_1(s_1)$ such that $s_2(a) = s_1(s_1(a))$.
+In the process of shuffling the deck multiple times, no new card enters the deck and no card leaves from the deck. The overall effect of shuffling multiple times is that some cards go from some positions to some different positions. So the effect of shuffling multiple times is the same as shuffling once with a different shuffle order or permutation (could even be the same permutation in some cases).
 
-In the same way, you can get $s_3 = s_2(s_1))$ and $s_4 = s_3(s_1)$. But instead of building linearly, you can build the shuffle orders exponentially.  
-$s_4 = s_2(s_2)$  
-$s_8 = s_4(s_4)$  
-$s_{16} = s_8(s_8)$  
-$s_{2i} = s_i(s_i)$
+For example, in the first sample test case, the initial deck is $a = \[10, 20, 30, 40, 50\]$. Shuffling it twice with the shuffle order, $s = \[3, 5, 4, 1, 2\]$ has the same effect as shuffling once with the shuffle order $s^2 = \[4, 2, 1, 3, 5\]$. Here, $s^i$ means the shuffle order applying which on an array has the same effect as applying $s$ on the array $i$ times.
 
-Now, given a shuffle order $s_1$, you can calculate and store $s_2$, $s_4$, $s_8$, $...$, $s_{2^{60}}$.  
-Whenever, you find a $k$, you can find $s_k$ using its binary representation.  
-For example, $s_{22} = s_{16}(s_4(s_2))$.  
-With this approach, you can find $s_k(a)$ in $O(n \times \log(k))$ time.
+Look at this example:  
+Take the array $a = \[10, 20, 30, 40, 50\]$ and the shuffle order $s = \[3, 5, 4, 1, 2\]$. Let's shuffle it multiple times and see what's happening:
+| $i$ | Array $a$ after being shuffled $i$ times | $s^i$ |
+| --- | --- | --- |
+| 0 | 10, 20, 30, 40, 50 | 1, 2, 3, 4, 5 |
+| 1 | 30, 50, 40, 10, 20 | 3, 5, 4, 1, 2 |
+| 2 | 40, 20, 10, 30, 50 | 4, 2, 1, 3, 5 |
+| 3 | 10, 50, 30, 40, 20 | 1, 5, 3, 4, 2 |
+| 4 | 30, 20, 40, 10, 50 | 3, 2, 4, 1, 5 |
 
-Finally, the cut operation is simply bringing the $p^{th}$ element ($0$-indexed) to the top.
+Since all shuffle orders are permutations, you can shuffle a shuffle order to get a new shuffle order of the same size. An interesting observation is that the shuffle operation is associative.  
+So, if you apply the shuffle order on itself, you'll get a new shuffle order, applying which on an array has the effect of applying the original shuffle order twice. Formally, if you have a shuffle order $s$, then you can create a new shuffle order $s^2 = s(s)$ such that $s^2(a) = s(s(a))$.
+
+In the example given above, you can shuffle $s = \[3, 5, 4, 1, 2\]$ by itself to get $s^2 = \[4, 2, 1, 3, 5\]$.  
+Shuffling $s^2$ with $s$, you'll get $s^3 = \[1, 5, 3, 4, 2\]$.  
+In the same way, $s^4 = s(s^3)) = \[3, 2, 4, 1, 5\]$
+
+So, for any $i$, you can get $s^i = s(s^{i-1}))$. But instead of building linearly, you can build the shuffle orders exponentially.  
+$s^2 = s(s)$  
+$s^4 = s^2(s^2)$  
+$s^8 = s^4(s^4)$  
+$s^{16} = s^8(s^8)$  
+In general, $s^{2i} = s^i(s^i)$
+
+Now, given a shuffle order $s$, you can calculate and store $s$, $s^2$, $s^4$, $s^8$, $...$, $s^{2^{60}}$.  
+Whenever, you find a $k$, you can find $s^k$ using its binary representation.  
+For example, $s^{22} = s^{16}(s^4(s^2))$.  
+With this approach, you can find $s^k(a)$ in $O(n \times \log(k))$ time.
+
+Finally, the cut operation is simply bringing the $(p+1)^{th}$ element ($p^{th}$ element if you're array is $0$-indexed) to the top.
 
 Overall Time Complexity per round = $O(n \times \log(k))$.  
 Time complexity for $r$ rounds = $O(n \times r \times \log(k))$.
@@ -994,7 +1019,7 @@ void solve(int tc)
     cin >> n >> r;
  
     vector<int> a(n), temp, sk(n);
-    vector<vector<int>> s(61, vector<int>(n)); // s[i] is s_{2 power i}
+    vector<vector<int>> s(61, vector<int>(n)); // s[i] is s^(2^i)
  
     for(auto &it: a) cin >> it;
     for(auto &it: s[0]) cin >> it;
@@ -1006,10 +1031,11 @@ void solve(int tc)
     {
         cin >> k >> p;
         
-        for(i=0; i<n; i++) sk[i]=i; // Identity permutation (shuffle order): keeps every element where it is.
+        for(i=0; i<n; i++) sk[i]=i; // Identity permutation: keeps every element where it is.
         for(i=0; i<61; i++) if((k>>i)&1) shuffle(sk, s[i]); // ((k>>i)&1) checks whether the i-th bit of k is set.
+        // Now sk has the shuffle order s^k
         
-        temp=a;
+        temp=a; // Can't shuffle the main array because it is needed for the next round
         shuffle(temp, sk);
  
         cout << temp[p] << endl;
@@ -1040,17 +1066,39 @@ signed main()
 
 <summary>Alternate Solution</summary>
 
-The shuffle order is a permutation.  
-Every permutation can be decomposed into one or more cycles.  
-Applying a permutaion once is equivalent to moving every element one step ahead in its cycle.
+Take the array $a = \[10, 20, 30, 40, 50\]$ and a shuffle order $s = \[3, 5, 4, 1, 2\]$. Let's shuffle it multiple times and see what's happening:
+| i | Array $a$ after being shuffled $i$ times |
+| --- | --- |
+| 0 | 10, 20, 30, 40, 50 |
+| 1 | 30, 50, 40, 10, 20 |
+| 2 | 40, 20, 10, 30, 50 |
+| 3 | 10, 50, 30, 40, 20 |
+| 4 | 30, 20, 40, 10, 50 |
+| 5 | 40, 50, 10, 30, 20 |
+| 6 | 10, 20, 30, 40, 50 |
+| 7 | 30, 50, 40, 10, 20 |
+| 8 | 40, 20, 10, 30, 50 |
+| 9 | 10, 50, 30, 40, 20 |
 
-For the solution, you can decompose the given permutation into cycles and for each element, store which cycle it belongs to and its position.  
-For each round, find which cycle $p$ is in and move it $k$ steps ahead. If it goes beyond the cycle size, simply take the remainder modulo the size of the cycle.
+Notice what's happening at the $1^{st}$ position. The sequence (10, 30, 40) is repeating.  
+In the same way, the sequence (20, 50) is repeating in the $2^{nd}$ position.  
+In the same way, there is a repeating sequence in every position.  
+
+Now look at the row where $i=6$. Notice that after $6$ shuffles, the the original array has returned. So the repeating sequences will cycle forever. So, if you know the cycle of a position $p$ has a size of $c$ and are asked what number will be in that position after $k$ shuffles, you can say that it will be the $(k \mod c)^{th}$ element of the cycle.
+
+Now notice that the cycle for the $1^{st}$ position and the $3^{rd}$ position is the same cycle. You can get the $3^{rd}$ cycle by taking the $1^{st}$ cycle and rotating it forward by $1$ position. So, you can use the cycle of the $1^{st}$ position to get any number of the $3^{rd}$ position. 
+
+Although the cyclic property is shown for a specific example, it will work for any permutation. In fact, every permutation can be decomposed into one or more cycles. Also, every element of the array belongs to exactly one cycle, so the total size of all the cycles will be equal to $n$.
+
+For the solution, you can precalculate all the cycles and for each element, store which cycle it belongs to and its position.  
+For each round, find which cycle $p$ is in and move $k$ steps forward. If it goes beyond the cycle size, simply divide it with the size of the cycle and take the remainder.
 
 Time Complexity for preprocessing = $O(n)$.  
 Time Complexity per round = $O(1)$.  
 Time complexity for $r$ rounds = $O(r)$.  
 Overall Time Complexity for a test case = $O(n + r)$.
+
+If you don't precalculate the cycles, you can start from $p$ and calculate its cycle for each test case. The time complexity will be $O(n \times r)$ and for the constraints of this problem, it will pass within the time limit.
 
 <details>
 <summary>Code</summary>
@@ -1077,8 +1125,8 @@ void solve(int tc)
  
     vector<int> a(n), s(n), temp;
     vector<bool> visited(n, 0);
-    vector<vector<int>> cycles;
-    vector<pair<int,int>> pos(n);
+    vector<vector<int>> cycles; // List of cycles
+    vector<pair<int,int>> pos(n); // Which cycle it belongs to and where
  
     for(auto &it: a) cin >> it;
     for(auto &it: s) cin >> it;
@@ -1092,7 +1140,7 @@ void solve(int tc)
         do
         {
             pos[j]={c, temp.size()};
-            temp.push_back(j);
+            temp.push_back(a[j]);
             visited[j]=1;
             j=s[j];
         }
@@ -1101,6 +1149,14 @@ void solve(int tc)
         cycles.push_back(temp);
         c++;
     }
+
+    // Check out how the cycles look
+    // for(i=0; i<cycles.size(); i++)
+    // {
+    //     cout << "Cycle #" << i+1 << ": ";
+    //     for(auto it: cycles[i]) cout << it << ' ';
+    //     cout << endl;
+    // }
  
     int k, p, cs;
     while(r--)
@@ -1112,7 +1168,7 @@ void solve(int tc)
  
         p=(offset+k)%cs;
  
-        cout << a[cycles[id][p]] << endl;
+        cout << cycles[id][p] << endl;
     }
 }
  

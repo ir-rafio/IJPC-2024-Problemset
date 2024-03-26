@@ -419,9 +419,16 @@ Difficulty: Easy-Medium
 Tags: Number Theory, Data Structures
 
 <details>
-<summary>Hint</summary>
+<summary>Hint 1</summary>
 
-Instead of thinking about the number of gift-boxes to remove, think about the number of gift-boxes to keep.
+Instead of thinking about gift-boxes to remove, think about the range of gift-boxes to keep. It will be a subarray.
+
+</details>
+
+<details>
+<summary>Hint 2</summary>
+
+Try to iterate over one of the endpoints for finding the optimal subarray.
 
 </details>
 
@@ -1412,14 +1419,18 @@ Tags: Implementation, Bitmasks
 <details>
 <summary>Hint</summary>
 
-Hint
+You don't need to build the matrix, you only need one value.
 
 </details>
 
 <details>
 <summary>Solution</summary>
 
-Recursive Solution
+Let $z = \max(x, y)$. So, $M_{\log(z+1)}$ should contain the cell $(x, y)$.
+
+All you need to do is recursively find on which quadrant the cell is, multiply the value of the quadrant and get the position of the cell corresponding to the shrunk matrix.
+
+Time Complexity = $O(\log(z))$
 
 </details>
 
@@ -1427,7 +1438,15 @@ Recursive Solution
 
 <summary>Alternate Solution</summary>
 
-Bitmasks Solution
+Since in every step you are halving the height and width of the matrix, you can consider the binary represtation of $x$ and $y$ to solve the problem.
+
+Iterate over the bits of $x$ and $y$ and multiply the result with the appropriate multiplier.
+| Bit in $x$ | Bit in $y$ | Multiplier |
+| --- | --- | --- |
+| 0 | 0 | 1 |
+| 0 | 1 | a |
+| 1 | 0 | b |
+| 1 | 1 | c |
 
 </details>
 </details>

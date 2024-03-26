@@ -438,8 +438,10 @@ If $(a_l + a_{l+1} + ... + a_r) \mod m = 0$,
 $(a_1 + a_2 + ... + a_{l-1}) \mod m = (a_1 + a_2 + ... + a_r) \mod m$ (assuming $l > 1$).  
 So, $p_{l-1} \mod m = p_r \mod m$, where $p_i = a_1 + a_2 + ... + a_i$.
 
-Now, what you need to do is calculate $p$, the prefix sum of $a$, and keep track of where each remainder appeared in $p$. For that, you can use a map. If a remainder only appeared once, ignore that. Otherwise for each remainder, pick the distance between the positions of the first appearance and the last appearance. The first appearance of the remainder $0$ has to be manually set to $0$.  
-Your final answer should be $n$ minus the maximum distance or $-1$ if no remainders are found at least twice.
+For the solution, you can follow this algorithm:
+- Calculate $p$, the prefix sum of $a$, and keep track of where each remainder appeared in $p$. For that, you can use a map.
+- If a remainder only appeared once, ignore that. Otherwise for each remainder, pick the distance between the positions of the first appearance and the last appearance. The first appearance of the remainder $0$ has to be manually set to $0$.
+- Your final answer should be $n$ minus the maximum distance or $-1$ if no remainders are found at least twice.
 
 Number of iterations = $O(n)$.  
 Access time for map = $O(\log (n))$.  
@@ -537,7 +539,7 @@ This problem can be solved using a brute force algorithm:
 Time Complexity = $O(n^2)$.  
 These will pass within the time limit easily because $n = 8$.
 
-This is an implementation problem that requires more time to code than to think. So multiple different codes are provided. You are encouraged to check them all out and try to understand how they're working. A general idea is that writing the same code multiple times is a bad practice. If a code block is reusable, it is often a good idea to create a function.
+This is an implementation problem that requires more time to code than to think. So multiple different codes are provided and you are encouraged to check them all out and try to understand how they're working. A general idea is that writing the same code multiple times is a bad practice. If a code block is reusable, it is often a good idea to create a function.
 
 <details>
 <summary>Code</summary>
@@ -1221,12 +1223,10 @@ If there exists multiple solutions, you may output any of them. So try to find t
 
 You have two unknown variables and only one equations. So you can choose a value for one of the variables and try to solve the equation for the other.
 
-Let's start with $x=1$.
+It's often a good idea to think about the extreme case first. So start with $x=1$.
 
-$k=1^y+y^1=1+y$
-
-So, $y=k-1$.
-
+$k = 1^y + y^1 = 1+y$  
+So, $y=k-1$.  
 Woah, you found a solution!
 
 <details>
@@ -1287,7 +1287,7 @@ Difficulty: Giveaway
 <details>
 <summary>Solution</summary>
 
-Just count the flag stands in IUT.
+Count the flag stands in IUT.
 
 </details>
 
@@ -1327,7 +1327,7 @@ The optimal play of a player is the best among these three options (one or two o
 - Use $2$ negative cards with the lowest value (highest absolute value).
 
 Now, from a deck, you need the highest value $mx_1$, 2nd highest value $mx_2$, lowest value $mn_1$ and 2nd lowest value $mn_2$. You can loop over the array in $O(n)$ time to get these, but an easier implementation is to simply sort the array in $O(n \log(n))$ time. And get the values from the first $2$ and last $2$ indexes.  
-Maximum Score = $\max(mx_1, mx_1 \times mx_2, mn_1 \times mn_2)$.
+Maximum Score = $\max(mx_1, \ mx_1 \times mx_2, \ mn_1 \times mn_2)$.
 
 You can divide it into three cases: no positive value, one positive value and more than one positive values, and handle them separately, but the result will be the same.
 

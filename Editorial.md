@@ -12,7 +12,7 @@ Tags: Greedy
 <details>
 <summary>Hint 1</summary>
 
-Handle the possible and impossible cases separately.
+Handle the impossible case separately.
 
 </details>
 
@@ -42,9 +42,9 @@ Does he always need to grab $(n+1)$ socks?
 
 Initially Abid had $a_i$ socks of color $i$ in his drawer. His brother took $b_i$ socks of color $i$. So there remains $(a_i - b_i)$ socks of color $i$ in Abid's drawer.
 
-The only case when Abid will not be able to find $2$ socks of the same color is when it doesn't exist. If there exists at least $2$ socks of the same color, in the worst case, Abid can grab all the socks of the drawer and later pick those $2$. This can be detected by checking if $a_i - b_i < 2$ for all $i$.
+The only case when Abid will not be able to find $2$ socks of the same color is when they don't exist. If there exists at least $2$ socks of the same color, in the worst case, Abid can grab all the socks of the drawer and later pick those $2$. This can be detected by checking if $a_i - b_i < 2$ for all $i$.
 
-Now, if there remains socks of $k$ different colors in Abis's drawer and he grabs $(k+1)$ socks, it is guaranteed that at least $2$ socks will have the same color (Pigeonhole Principle).  
+Now, if there remains socks of $k$ different colors in Abid's drawer and he grabs $(k+1)$ socks, it is guaranteed that at least $2$ socks will have the same color (Pigeonhole Principle).  
 You can easily prove it using proof by contradiction. If no $2$ socks that Abid grabs have the same color, all the $(k+1)$ socks Abid grabs have different colors. But according to the premise, socks of $(k+1)$ different colors do not exist in Abid's drawer. So it's a contradiction.
 
 Now, since Abid had socks of $n$ different colors, the maximum possible value of $k$ is $n$. However, there can be cases where $k$ is less than $n$. If for a color, Abid's brother took all the socks of that color, then socks of that color do not exist on the drawer anymore.
@@ -61,25 +61,25 @@ You can also handle the impossible case at the end. Count the total number of so
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
- 
+
 // #define int long long
 #define fastio ios_base::sync_with_stdio(0); cin.tie(0)
 #define endl "\n"
- 
- 
- 
+
+
+
 void pre()
 {
     fastio;
- 
-    
+
+
 }
- 
+
 void solve(int tc)
 {
     int i, n;
     cin >> n;
- 
+
     vector<int> a(n), b(n);
     for(i=0; i<n; i++) cin >> a[i];
     for(i=0; i<n; i++) cin >> b[i];
@@ -91,24 +91,24 @@ void solve(int tc)
         if(remaining==0) z++;
         if(remaining>1) flag=1;
     }
- 
+
     if(flag) cout << n+1-z;
     else cout << -1;
 }
- 
+
 signed main()
 {
     pre();
- 
+
     int tc, tt=1;
     // cin >> tt;
-    
+
     for(tc=1; tc<=tt; tc++)
     {
         solve(tc);
         // cout << endl;
     }
- 
+
     return 0;
 }
 ```
@@ -157,7 +157,7 @@ Manually find the answer for $W = 1$, $W = 2$, $W = 3$, $...$, $W = 15$ and try 
 <details>
 <summary>Solution</summary>
 
-The weight of the $i^{th}$ stone is $3^i$ ($i$ starts from $0$). For every stone, you have three options: use it at the left pan, don't use it, or use it at the right pan. You can define the value of a stone as its weight multiplied by $-1$, $0$ or $1$ if it's used at the right pan, not used, or used at the left pan respectively. The sum of the values of all stones must equal to $W$.
+The weight of the $i^{th}$ stone is $3^i$ ($i$ starts from $0$). For every stone, you have three options: use it at the left pan, don't use it, or use it at the right pan. You can define the value of a stone as its weight multiplied by $-1$, $0$ or $1$ if it's used at the right pan, not used, or used at the left pan respectively. The sum of the values of all stones must be equal to $W$.
 
 Now, there are $3$ possible multipliers for each stone and the weights of the stones are powers of $3$. So, you can represent any $W$ in a modified ternary number system ($3$-based number system) where the digits of the number will represent the multipiers. Since it is a valid number system, forming any $W$ is possible. So, the impossible case will never occur.
 
@@ -169,6 +169,7 @@ And for all $i$, $m_i = -1, 0, \text{or } 1$.
 Since $3^{20} > 2 \times 10^9$, you will never need more than $21$ stones. \[nice reference to 'The Luncheon', right?\]
 
 For the solution, you can follow this algorithm:
+
 - Convert $W$ into a ternary ($3$-based) number.
 - Iterate over the digits from right to left.
 - If you find the $i^{th}$ digit to be $0$, you will not use the $i^{th}$ stone (keep $m_i$ as $0$).
@@ -177,7 +178,7 @@ For the solution, you can follow this algorithm:
 - If the $i^{th}$ digit is $3$, you will not use that stone (set $m_i$ to $0$) and increase the next digit by $1$.
 - The digit will never be more than $3$. Because in a $3$-based number system, the maximum digit is $2$. Here, at max you can get an increase of $1$ from the previous digit and get it to $3$ but you'll never find a digit exceeding $3$.
 
-In this representation, you will get the values of $m_i$ from the $i^{th}$ digit of the the number. 
+In this representation, you will get the values of $m_i$ from the $i^{th}$ digit of the number.
 
 Finally, you will add the weights of all the stones placed in the left pan to get $X$ and the weights of all the stones in the right pan to get $Y$.
 
@@ -234,20 +235,20 @@ Verification: $811 - 36 = 775$.
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
- 
+
 #define int long long
 #define fastio ios_base::sync_with_stdio(0); cin.tie(0)
 #define endl "\n"
- 
 
- 
+
+
 void pre()
 {
     fastio;
- 
+
 
 }
- 
+
 void solve(int tc)
 {
     int i, w, x=0, y=0;
@@ -281,23 +282,23 @@ void solve(int tc)
 
         stone*=3;
     }
- 
+
     cout << x << ' ' << y;
 }
- 
+
 signed main()
 {
     pre();
- 
+
     int tc, tt=1;
     cin >> tt;
-    
+
     for(tc=1; tc<=tt; tc++)
     {
         solve(tc);
         cout << endl;
     }
- 
+
     return 0;
 }
 ```
@@ -312,10 +313,10 @@ signed main()
 You have an object of weight $W$ on the right pan. To reach equilibrium, you need to add weight $W$ on the left pan.
 
 The weight of the $i^{th}$ stone is $3^i$ ($i$ starts from $0$).  
-If you use all stones from $0$ to $(i-1)$, the total weight will be $3^0 + 3^1 + 3^2 + ... + 3^{i-1} = \frac{3^i - 1}{2}$ (sum of geometric series). Let's define it as $s_{i-1}$.  
+If you use all stones from $0$ to $(i-1)$, the total weight will be $3^0 + 3^1 + 3^2 + ... + 3^{i-1} = \frac{1}{2} \times (3^i - 1)$ (sum of geometric series). Let's define it as $s_{i-1}$.  
 So, if $W \ge 3^i$, using all the stones from $0$ to $(i-1)$ will not be enough.  
-If you use all stones from $0$ to $i$, you can get to the total of $s_i = \frac{3^{i+1} - 1}{2}$. Clearly, $3^i < s_i < 3^{i+1}$ for any $i \in \mathbb{N}$.  
-Now, you can find the value of $i$ such that $W$ falls in the range $[3^i, 3^{i+1})$, divide the problem into two cases and solve the problem recursively.  
+If you use all stones from $0$ to $i$, you can get to the total of $s_i = \frac{1}{2} \times (3^{i+1} - 1)$. Clearly, $3^i < s_i < 3^{i+1}$ for any $i \in \mathbb{N}$.  
+Now, you can find the value of $i$ such that $W$ falls in the range $[3^i, 3^{i+1})$, divide the problem into two cases and solve the problem recursively.
 
 Case $1$: $W \le s_i$  
 At first, place the $i^{th}$ stone on the left pan. Now the left pan has weight $3^i$ and the left pan has weight $W$. To reach equilibrium, we need to add weight $(W - 3^i)$ on the left pan.
@@ -338,68 +339,68 @@ By using binary search to find the value of $i$, you can reduce the complexity f
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
- 
+
 #define int long long
 #define fastio ios_base::sync_with_stdio(0); cin.tie(0)
 #define endl "\n"
- 
+
 pair<int,int> flip(pair<int,int> p)
 {
     return {p.second, p.first};
 }
- 
+
 pair<int,int> add(pair<int,int> p1, pair<int,int> p2)
 {
     return {p1.first+p2.first, p1.second+p2.second};
 }
- 
+
 pair<int,int> balance(int w)
 {
     if(w==0) return {0, 0};
- 
+
     int stone=1, sum=1;
- 
+
     while(stone*3<=w) // After escaping this loop: stone<=w, stone*3>w
     {
         stone*=3;
         sum+=stone;
     }
- 
+
     if(w<=sum) return add({stone, 0}, balance(w-stone));
- 
+
     stone*=3;
     return add({stone, 0}, flip(balance(stone-w)));
 }
- 
+
 void pre()
 {
     fastio;
- 
-    
+
+
 }
- 
+
 void solve(int tc)
 {
     int w;
     cin >> w;
- 
+
     auto [x, y] = balance(w);
     cout << x << ' ' << y;
 }
- 
+
 signed main()
 {
     pre();
- 
+
     int tc, tt=1;
     cin >> tt;
-    
+
     for(tc=1; tc<=tt; tc++)
     {
         solve(tc);
         cout << endl;
     }
- 
+
     return 0;
 }
 ```
@@ -439,6 +440,7 @@ $(a_1 + a_2 + ... + a_{l-1}) \mod m = (a_1 + a_2 + ... + a_r) \mod m$ (assuming 
 So, $p_{l-1} \mod m = p_r \mod m$, where $p_i = a_1 + a_2 + ... + a_i$.
 
 For the solution, you can follow this algorithm:
+
 - Calculate $p$, the prefix sum of $a$, and keep track of where each remainder appeared in $p$. For that, you can use a map.
 - If a remainder only appeared once, ignore that. Otherwise for each remainder, pick the distance between the positions of the first appearance and the last appearance. The first appearance of the remainder $0$ has to be manually set to $0$.
 - Your final answer should be $n$ minus the maximum distance or $-1$ if no remainders are found at least twice.
@@ -464,7 +466,7 @@ void pre()
 {
     fastio;
 
-    
+
 }
 
 void solve(int tc)
@@ -502,7 +504,7 @@ signed main()
 
     int tc, tt=1;
     cin >> tt;
-    
+
     for(tc=1; tc<=tt; tc++)
     {
         solve(tc);
@@ -530,6 +532,7 @@ Tags: Brute Force, Implementation
 <summary>Solution</summary>
 
 This problem can be solved using a brute force algorithm:
+
 - Traverse the entire board.
 - For each white piece, simulate all of its moves. Depending on what type of piece it is, the movement will be different.
 - If a white piece can capture the king in one move, mark it as a candidate attacker.
@@ -859,7 +862,7 @@ pair<int,int> findAttacker(pair<int,int> target)
             if(board[x][y]=='B' && direction.first+direction.second==0) atk=min(atk, cell, comp);
 
             if(board[x][y]=='Q') atk=min(atk, cell, comp);
-                
+
             break; // If the piece is not capturing the target, then it is protecting it.
         }
     }
@@ -871,14 +874,14 @@ void pre()
 {
     fastio;
 
-    
+
 }
 
 void solve(int tc)
 {
     int i, j;
     for(i=0; i<8; i++) cin >> board[i];
-    
+
     pair<int,int> target={-1, 8}, atk;
     for(i=0; i<8 && target.first<0; i++) for(j=0; j<8; j++) if(board[i][j]=='k')
     {
@@ -897,7 +900,7 @@ signed main()
 
     int tc, tt=1;
     cin >> tt;
-    
+
     for(tc=1; tc<=tt; tc++)
     {
         solve(tc);
@@ -993,70 +996,70 @@ Time complexity for $r$ rounds = $O(n \times r \times \log(k))$.
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
- 
+
 #define int long long
 #define fastio ios_base::sync_with_stdio(0); cin.tie(0)
 #define endl "\n"
- 
+
 void shuffle(vector<int>& a, vector<int>& s)
 {
     int i, n=a.size();
- 
+
     vector<int> temp(n);
     for(i=0; i<n; i++) temp[i]=a[s[i]];
- 
+
     a=temp;
 }
- 
+
 void pre()
 {
     fastio;
- 
-    
+
+
 }
- 
+
 void solve(int tc)
 {
     int i, n, r, k, p;
     cin >> n >> r;
- 
+
     vector<int> a(n), temp, sk(n);
     vector<vector<int>> s(61, vector<int>(n)); // s[i] is s^(2^i)
- 
+
     for(auto &it: a) cin >> it;
     for(auto &it: s[0]) cin >> it;
     for(auto &it: s[0]) it--; // Converting from 1-indexed to 0-indexed
- 
+
     for(i=1; i<61; i++) s[i]=s[i-1], shuffle(s[i], s[i-1]);
- 
+
     while(r--)
     {
         cin >> k >> p;
-        
+
         for(i=0; i<n; i++) sk[i]=i; // Identity permutation: keeps every element where it is.
         for(i=0; i<61; i++) if((k>>i)&1) shuffle(sk, s[i]); // ((k>>i)&1) checks whether the i-th bit of k is set.
         // Now sk has the shuffle order s^k
-        
+
         temp=a; // Can't shuffle the main array because it is needed for the next round
         shuffle(temp, sk);
- 
+
         cout << temp[p] << endl;
     }
 }
- 
+
 signed main()
 {
     pre();
- 
+
     int tc, tt=1;
     cin >> tt;
-    
+
     for(tc=1; tc<=tt; tc++)
     {
         solve(tc);
         // cout << endl;
     }
- 
+
     return 0;
 }
 ```
@@ -1084,11 +1087,11 @@ Take the array $a = \[10, 20, 30, 40, 50\]$ and a shuffle order $s = \[3, 5, 4, 
 
 Notice what's happening at the $1^{st}$ position. The sequence (10, 30, 40) is repeating.  
 In the same way, the sequence (20, 50) is repeating in the $2^{nd}$ position.  
-In the same way, there is a repeating sequence in every position.  
+In the same way, there is a repeating sequence in every position.
 
-Now look at the row where $i=6$. Notice that after $6$ shuffles, the the original array has returned. So the repeating sequences will cycle forever. So, if you know the cycle of a position $p$ has a size of $c$ and are asked what number will be in that position after $k$ shuffles, you can say that it will be the $(k \mod c)^{th}$ element of the cycle.
+Now look at the row where $i=6$. Notice that after $6$ shuffles, the original array has returned. So the repeating sequences will cycle forever. So, if you know the cycle of a position $p$ has a size of $c$ and are asked what number will be in that position after $k$ shuffles, you can say that it will be the $(k \mod c)^{th}$ element of the cycle.
 
-Now notice that the cycle for the $1^{st}$ position and the $3^{rd}$ position is the same cycle. You can get the $3^{rd}$ cycle by taking the $1^{st}$ cycle and rotating it forward by $1$ position. So, you can use the cycle of the $1^{st}$ position to get any number of the $3^{rd}$ position. 
+Now notice that the cycle for the $1^{st}$ position and the $3^{rd}$ position is the same cycle. You can get the $3^{rd}$ cycle by taking the $1^{st}$ cycle and moving it forward by $1$ position. So, you can use the cycle of the $1^{st}$ position to get any number of the $3^{rd}$ position.
 
 Although the cyclic property is shown for a specific example, it will work for any permutation. In fact, every permutation can be decomposed into one or more cycles. Also, every element of the array belongs to exactly one cycle, so the total size of all the cycles will be equal to $n$.
 
@@ -1108,36 +1111,36 @@ If you don't precalculate the cycles, you can start from $p$ and calculate its c
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
- 
+
 #define int long long
 #define fastio ios_base::sync_with_stdio(0); cin.tie(0)
 #define endl "\n"
- 
+
 void pre()
 {
     fastio;
- 
-    
+
+
 }
- 
+
 void solve(int tc)
 {
     int i, j, n, r, c=0;
     cin >> n >> r;
- 
+
     vector<int> a(n), s(n), temp;
     vector<bool> visited(n, 0);
     vector<vector<int>> cycles; // List of cycles
     vector<pair<int,int>> pos(n); // Which cycle it belongs to and where
- 
+
     for(auto &it: a) cin >> it;
     for(auto &it: s) cin >> it;
     for(auto &it: s) it--;
- 
+
     for(i=0; i<n; i++) if(!visited[i])
     {
         temp.clear();
- 
+
         j=i;
         do
         {
@@ -1147,7 +1150,7 @@ void solve(int tc)
             j=s[j];
         }
         while(j!=i);
- 
+
         cycles.push_back(temp);
         c++;
     }
@@ -1159,34 +1162,34 @@ void solve(int tc)
     //     for(auto it: cycles[i]) cout << it << ' ';
     //     cout << endl;
     // }
- 
+
     int k, p, cs;
     while(r--)
     {
         cin >> k >> p;
-        
+
         auto [id, offset]=pos[p];
         cs=cycles[id].size();
- 
+
         p=(offset+k)%cs;
- 
+
         cout << cycles[id][p] << endl;
     }
 }
- 
+
 signed main()
 {
     pre();
- 
+
     int tc, tt=1;
     cin >> tt;
-    
+
     for(tc=1; tc<=tt; tc++)
     {
         solve(tc);
         // cout << endl;
     }
- 
+
     return 0;
 }
 ```
@@ -1322,6 +1325,7 @@ Both players will maximize their scores. Whoever has a higher score will win the
 
 Let's define the value of a card as the number written on it, a positive card as a card with a non-negative value and a negative cards as one with a negative value.  
 The optimal play of a player is the best among these three options (one or two options may not be available):
+
 - Use $1$ positive card with the highest value.
 - Use $2$ positive cards with the highest value.
 - Use $2$ negative cards with the lowest value (highest absolute value).
@@ -1357,7 +1361,7 @@ void pre()
 {
     fastio;
 
-    
+
 }
 
 void solve(int tc)
@@ -1369,7 +1373,7 @@ void solve(int tc)
     for(i=0; i<n2; i++) cin >> b[i];
 
     int yugi=maxScore(a, n1), kaiba=maxScore(b, n2);
-    
+
     if(yugi>kaiba) cout << "Yugi";
     else if(kaiba>yugi) cout << "Kaiba";
     else cout << "Tie";
@@ -1381,7 +1385,7 @@ signed main()
 
     int tc, tt=1;
     cin >> tt;
-    
+
     for(tc=1; tc<=tt; tc++)
     {
         solve(tc);

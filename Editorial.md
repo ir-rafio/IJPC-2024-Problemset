@@ -1426,7 +1426,7 @@ You don't need to build the matrix, you only need one value.
 <details>
 <summary>Solution</summary>
 
-Let $z = \max(x, y)$. So, $M_{\log(z+1)}$ should contain the cell $(x, y)$.
+Let $z = \max(x, y)$. So, $M_{\log(z)+1}$ should contain the cell $(x, y)$.
 
 All you need to do is find on which quadrant the cell is, multiply the value of the quadrant and get the position of the cell corresponding to the shrunk matrix.  
 Do the same process for the shrunk matrix and keep shrinking the matrix untill you reach size $1$.  

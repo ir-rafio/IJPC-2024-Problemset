@@ -1231,7 +1231,7 @@ If there exists multiple solutions, you may output any of them. So try to find t
 <details>
 <summary>Solution</summary>
 
-You have two unknown variables and only one equations. So you can choose a value for one of the variables and try to solve the equation for the other.
+You have two unknown variables and only one equation. So you can choose a value for one of the variables and try to solve the equation for the other.
 
 Let's start with $x=1$.
 

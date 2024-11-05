@@ -315,7 +315,8 @@ You have an object of weight $W$ on the right pan. To reach equilibrium, you nee
 The weight of the $i^{th}$ stone is $3^i$ ($i$ starts from $0$).  
 If you use all stones from $0$ to $(i-1)$, the total weight will be $3^0 + 3^1 + 3^2 + ... + 3^{i-1} = \frac{1}{2} \times (3^i - 1)$ (sum of geometric series). Let's define it as $s_{i-1}$.  
 So, if $W \ge 3^i$, using all the stones from $0$ to $(i-1)$ will not be enough.  
-If you use all stones from $0$ to $i$, you can get to the total of $s_i = \frac{1}{2} \times (3^{i+1} - 1)$. Clearly, $3^i < s_i < 3^{i+1}$ for any $i \in \mathbb{N}$.  
+If you use all stones from $0$ to $i$, you can get to the total of $s_i = \frac{1}{2} \times (3^{i+1} - 1)$.  
+Clearly, $3^i < s_i < 3^{i+1}$ for any $i \in \mathbb{N}$.  
 Now, you can find the value of $i$ such that $W$ falls in the range $[3^i, 3^{i+1})$, divide the problem into two cases and solve the problem recursively.
 
 Case $1$: $W \le s_i$  
@@ -332,6 +333,30 @@ Maximum number of recursion calls for a single test case is $O(\log (W))$.
 Overall Time Complexity for a test case = $O({\log (W)}^2)$.
 
 By using binary search to find the value of $i$, you can reduce the complexity for a single test to $O(\log (W) \log \log (W))$ but that won't be necessary here.
+
+<details>
+<summary>Proof</summary>
+
+A correct combination always exists. This can be proved by induction.  
+The correct combination is unique. This can be proved by contradiction.
+
+For $3^i \le W < 3^{i+1}$:  
+At least the $i^{th}$ stone needs to be used because $W \ge 3^i > s_{i-1}$.  
+At most the $(i+1)^{th}$ stone needs to be used because $3^{i+2} - s_{i+1} = \frac{1}{2} \times (3^{i+2} + 1) > 3^{i+1} > W$.  
+So, the heaviest stone that needs to be used is either the $i^{th}$ stone or the $(i+1)^{th}$ stone.
+
+Case $1$: The heaviest stone used is the $i^{th}$ stone.  
+$W \le s_i$  
+$W - 3^i \le s_i - 3^i = s_{i-1} < 3^{i-1}$  
+Since $W - 3^i < 3^{i-1}$, at most the $(i-1)^{th}$ stone needs to be used for solving the next subproblem.
+
+Case $2$: The heaviest stone used is the $(i+1)^{th}$ stone.  
+$W > s_i$  
+$W \ge s_i + 1$ ($W$ is an integer)  
+$3^{i+1} - W \le 3^{i+1} - s_i - 1 = s_i$  
+Since $3^{i+1} - W \le s_i$, at most the $i^{th}$ stone needs to be used for solving the next subproblem.
+
+</details>
 
 <details>
 <summary>Code</summary>

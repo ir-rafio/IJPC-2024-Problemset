@@ -320,10 +320,10 @@ Clearly, $3^i < s_i < 3^{i+1}$ for any $i \in \mathbb{N}$.
 Now, you can find the value of $i$ such that $W$ falls in the range $[3^i, 3^{i+1})$, divide the problem into two cases and solve the problem recursively.
 
 Case $1$: $W \le s_i$  
-At first, place the $i^{th}$ stone on the left pan. Now the left pan has weight $3^i$ and the left pan has weight $W$. To reach equilibrium, we need to add weight $(W - 3^i)$ on the left pan.
+At first, place the $i^{th}$ stone on the left pan. Now the left pan has weight $3^i$ and the right pan has weight $W$. To reach equilibrium, we need to add weight $(W - 3^i)$ on the left pan.
 
 Case $2$: $W > s_i$  
-At first, place the $(i+1)^{th}$ stone on the left pan. Now the left pan has weight $3^{i+1}$ and the left pan has weight $W$. To reach equilibrium, we need to add weight $(3^{i+1} - W)$ on the right pan.
+At first, place the $(i+1)^{th}$ stone on the left pan. Now the left pan has weight $3^{i+1}$ and the right pan has weight $W$. To reach equilibrium, we need to add weight $(3^{i+1} - W)$ on the right pan.
 
 Base Case: $W = 0$  
 The balance has reached equilibrium and no more weight needs to be added.
